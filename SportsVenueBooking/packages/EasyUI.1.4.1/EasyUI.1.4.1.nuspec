@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>EasyUI</id>
+    <version>1.4.1</version>
+    <title>jQuery EasyUI</title>
+    <authors>jeasyui.com</authors>
+    <owners>jeasyui.com</owners>
+    <licenseUrl>http://www.gnu.org/licenses/gpl.txt</licenseUrl>
+    <projectUrl>http://jeasyui.com/</projectUrl>
+    <iconUrl>http://jeasyui.com/favicon.ico</iconUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <description>◦easyui is a collection of user-interface plugin based on jQuery.
+◦easyui provides essential functionality for building modern, interactive, javascript applications.
+◦using easyui you don't need to write many javascript code, you usually defines user-interface by writing some HTML markup.
+◦complete framework for HTML5 web page.
+◦easyui save your time and scales while developing your products.
+◦easyui is very easy but powerful.</description>
+    <summary>jQuery EasyUI framework helps you build your web pages easily.</summary>
+    <releaseNotes>Version 1.4.1
+-------------
+Bug
+◦The combogrid has different height than other combo components. fixed.
+◦datagrid: The row element loses some class style value after calling 'updateRow' method. fixed.
+◦menubutton: Calling 'enable' method on a disabled button can not work well. fixed.
+◦form: The filebox components in the form do not work correctly after calling 'clear' method. fixed.
+
+Improvement
+◦tabs: The 'update' method accepts 'type' option that allows the user to update the header,body,or both.
+◦panel: Add 'openAnimation','openDuration','closeAnimation' and 'closeDuration' properties to set the animation for opening or closing a panel.
+◦panel: Add 'footer' property that allows the user to add a footer bar to the bottom of panel.
+◦datagrid: Calling 'endEdit' method will accept the editing value correctly.
+◦datagrid: Add 'onBeforeSelect','onBeforeCheck','onBeforeUnselect','onBeforeUncheck' events.
+◦propertygrid: The user can edit a row by calling 'beginEdit' method.
+◦datebox: Add 'cloneFrom' method to create the datebox component quickly.
+◦datetimebox: Add 'cloneFrom' method to create the datetimebox component quickly.</releaseNotes>
+    <copyright>© 2010-2014 www.jeasyui.com</copyright>
+    <tags>jquery easyui</tags>
+    <dependencies>
+      <dependency id="jQuery" version="1.11.1" />
+    </dependencies>
+  </metadata>
+</package>

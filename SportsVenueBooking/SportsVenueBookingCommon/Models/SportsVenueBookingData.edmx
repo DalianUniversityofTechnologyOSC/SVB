@@ -1,0 +1,565 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="SportsVenueBookingModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityType Name="Durations">
+          <Key>
+            <PropertyRef Name="duration_Id" />
+          </Key>
+          <Property Name="duration_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="duration_Name" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="duration_StartTime" Type="time" Precision="7" Nullable="false" />
+          <Property Name="duration_EndTime" Type="time" Precision="7" Nullable="false" />
+          <Property Name="duration_User" Type="bigint" Nullable="false" />
+          <Property Name="duration_IsDel" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Reservations">
+          <Key>
+            <PropertyRef Name="reservation_Id" />
+          </Key>
+          <Property Name="reservation_Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="reservation_User" Type="bigint" Nullable="false" />
+          <Property Name="reservation_StartTime" Type="datetime" Nullable="false" />
+          <Property Name="reservation_EndTime" Type="datetime" Nullable="false" />
+          <Property Name="reservation_IsBilling" Type="bit" Nullable="false" />
+          <Property Name="reservation_Snooker" Type="bigint" Nullable="false" />
+          <Property Name="reservation_IsDel" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Snookers">
+          <Key>
+            <PropertyRef Name="snooker_Id" />
+          </Key>
+          <Property Name="snooker_Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="snooker_Space" Type="int" Nullable="false" />
+          <Property Name="snooker_Number" Type="int" Nullable="false" />
+          <Property Name="snooker_User" Type="bigint" Nullable="false" />
+          <Property Name="snooker_Price" Type="float" Nullable="false" />
+          <Property Name="snooker_IsDel" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Spaces">
+          <Key>
+            <PropertyRef Name="space_Id" />
+          </Key>
+          <Property Name="space_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="space_User" Type="bigint" Nullable="false" />
+          <Property Name="space_Name" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="space_IsDel" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="user_Id" />
+          </Key>
+          <Property Name="user_Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_UserNumber" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="user_Password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="user_Type" Type="int" Nullable="false" />
+          <Property Name="user_Class" Type="varchar" MaxLength="20" />
+          <Property Name="user_Name" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="user_Status" Type="bit" Nullable="false" />
+          <Property Name="user_Remark" Type="varchar" MaxLength="50" />
+          <Property Name="user_IsDel" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="Durations_Users_UserId">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Durations" Type="Self.Durations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="user_Id" />
+            </Principal>
+            <Dependent Role="Durations">
+              <PropertyRef Name="duration_User" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Reservations_Snookers_SnookerId">
+          <End Role="Snookers" Type="Self.Snookers" Multiplicity="1" />
+          <End Role="Reservations" Type="Self.Reservations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Snookers">
+              <PropertyRef Name="snooker_Id" />
+            </Principal>
+            <Dependent Role="Reservations">
+              <PropertyRef Name="reservation_Snooker" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Reservations_Users_UserId">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Reservations" Type="Self.Reservations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="user_Id" />
+            </Principal>
+            <Dependent Role="Reservations">
+              <PropertyRef Name="reservation_User" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Snookers_Spaces_SpaceId">
+          <End Role="Spaces" Type="Self.Spaces" Multiplicity="1" />
+          <End Role="Snookers" Type="Self.Snookers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Spaces">
+              <PropertyRef Name="space_Id" />
+            </Principal>
+            <Dependent Role="Snookers">
+              <PropertyRef Name="snooker_Space" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Snookers_Users_UserId">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Snookers" Type="Self.Snookers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="user_Id" />
+            </Principal>
+            <Dependent Role="Snookers">
+              <PropertyRef Name="snooker_User" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Spaces_Users_UserId">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Spaces" Type="Self.Spaces" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="user_Id" />
+            </Principal>
+            <Dependent Role="Spaces">
+              <PropertyRef Name="space_User" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="SportsVenueBookingModelStoreContainer">
+          <EntitySet Name="Durations" EntityType="Self.Durations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reservations" EntityType="Self.Reservations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Snookers" EntityType="Self.Snookers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Spaces" EntityType="Self.Spaces" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="Durations_Users_UserId" Association="Self.Durations_Users_UserId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Durations" EntitySet="Durations" />
+          </AssociationSet>
+          <AssociationSet Name="Reservations_Snookers_SnookerId" Association="Self.Reservations_Snookers_SnookerId">
+            <End Role="Snookers" EntitySet="Snookers" />
+            <End Role="Reservations" EntitySet="Reservations" />
+          </AssociationSet>
+          <AssociationSet Name="Reservations_Users_UserId" Association="Self.Reservations_Users_UserId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Reservations" EntitySet="Reservations" />
+          </AssociationSet>
+          <AssociationSet Name="Snookers_Spaces_SpaceId" Association="Self.Snookers_Spaces_SpaceId">
+            <End Role="Spaces" EntitySet="Spaces" />
+            <End Role="Snookers" EntitySet="Snookers" />
+          </AssociationSet>
+          <AssociationSet Name="Snookers_Users_UserId" Association="Self.Snookers_Users_UserId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Snookers" EntitySet="Snookers" />
+          </AssociationSet>
+          <AssociationSet Name="Spaces_Users_UserId" Association="Self.Spaces_Users_UserId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Spaces" EntitySet="Spaces" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SportsVenueBookingModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityType Name="Duration">
+          <Key>
+            <PropertyRef Name="duration_Id" />
+          </Key>
+          <Property Name="duration_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="duration_Name" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="duration_StartTime" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="duration_EndTime" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="duration_User" Type="Int64" Nullable="false" />
+          <Property Name="duration_IsDel" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="Self.Durations_Users_UserId" FromRole="Durations" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Reservation">
+          <Key>
+            <PropertyRef Name="reservation_Id" />
+          </Key>
+          <Property Name="reservation_Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="reservation_User" Type="Int64" Nullable="false" />
+          <Property Name="reservation_StartTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="reservation_EndTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="reservation_IsBilling" Type="Boolean" Nullable="false" />
+          <Property Name="reservation_Snooker" Type="Int64" Nullable="false" />
+          <Property Name="reservation_IsDel" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Snooker" Relationship="Self.Reservations_Snookers_SnookerId" FromRole="Reservations" ToRole="Snookers" />
+          <NavigationProperty Name="User" Relationship="Self.Reservations_Users_UserId" FromRole="Reservations" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Snooker">
+          <Key>
+            <PropertyRef Name="snooker_Id" />
+          </Key>
+          <Property Name="snooker_Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="snooker_Space" Type="Int32" Nullable="false" />
+          <Property Name="snooker_Number" Type="Int32" Nullable="false" />
+          <Property Name="snooker_User" Type="Int64" Nullable="false" />
+          <Property Name="snooker_Price" Type="Double" Nullable="false" />
+          <Property Name="snooker_IsDel" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Reservations" Relationship="Self.Reservations_Snookers_SnookerId" FromRole="Snookers" ToRole="Reservations" />
+          <NavigationProperty Name="Space" Relationship="Self.Snookers_Spaces_SpaceId" FromRole="Snookers" ToRole="Spaces" />
+          <NavigationProperty Name="User" Relationship="Self.Snookers_Users_UserId" FromRole="Snookers" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Space">
+          <Key>
+            <PropertyRef Name="space_Id" />
+          </Key>
+          <Property Name="space_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="space_User" Type="Int64" Nullable="false" />
+          <Property Name="space_Name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="space_IsDel" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Snookers" Relationship="Self.Snookers_Spaces_SpaceId" FromRole="Spaces" ToRole="Snookers" />
+          <NavigationProperty Name="User" Relationship="Self.Spaces_Users_UserId" FromRole="Spaces" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="user_Id" />
+          </Key>
+          <Property Name="user_Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_UserNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="user_Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="user_Type" Type="Int32" Nullable="false" />
+          <Property Name="user_Class" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="user_Name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="user_Status" Type="Boolean" Nullable="false" />
+          <Property Name="user_Remark" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="user_IsDel" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Durations" Relationship="Self.Durations_Users_UserId" FromRole="Users" ToRole="Durations" />
+          <NavigationProperty Name="Reservations" Relationship="Self.Reservations_Users_UserId" FromRole="Users" ToRole="Reservations" />
+          <NavigationProperty Name="Snookers" Relationship="Self.Snookers_Users_UserId" FromRole="Users" ToRole="Snookers" />
+          <NavigationProperty Name="Spaces" Relationship="Self.Spaces_Users_UserId" FromRole="Users" ToRole="Spaces" />
+        </EntityType>
+        <Association Name="Durations_Users_UserId">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="Durations" Type="Self.Duration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="user_Id" />
+            </Principal>
+            <Dependent Role="Durations">
+              <PropertyRef Name="duration_User" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Reservations_Snookers_SnookerId">
+          <End Role="Snookers" Type="Self.Snooker" Multiplicity="1" />
+          <End Role="Reservations" Type="Self.Reservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Snookers">
+              <PropertyRef Name="snooker_Id" />
+            </Principal>
+            <Dependent Role="Reservations">
+              <PropertyRef Name="reservation_Snooker" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Reservations_Users_UserId">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="Reservations" Type="Self.Reservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="user_Id" />
+            </Principal>
+            <Dependent Role="Reservations">
+              <PropertyRef Name="reservation_User" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Snookers_Spaces_SpaceId">
+          <End Role="Spaces" Type="Self.Space" Multiplicity="1" />
+          <End Role="Snookers" Type="Self.Snooker" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Spaces">
+              <PropertyRef Name="space_Id" />
+            </Principal>
+            <Dependent Role="Snookers">
+              <PropertyRef Name="snooker_Space" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Snookers_Users_UserId">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="Snookers" Type="Self.Snooker" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="user_Id" />
+            </Principal>
+            <Dependent Role="Snookers">
+              <PropertyRef Name="snooker_User" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Spaces_Users_UserId">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="Spaces" Type="Self.Space" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="user_Id" />
+            </Principal>
+            <Dependent Role="Spaces">
+              <PropertyRef Name="space_User" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SportsVenueBookingEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Durations" EntityType="Self.Duration" />
+          <EntitySet Name="Reservations" EntityType="Self.Reservation" />
+          <EntitySet Name="Snookers" EntityType="Self.Snooker" />
+          <EntitySet Name="Spaces" EntityType="Self.Space" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="Durations_Users_UserId" Association="Self.Durations_Users_UserId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Durations" EntitySet="Durations" />
+          </AssociationSet>
+          <AssociationSet Name="Reservations_Snookers_SnookerId" Association="Self.Reservations_Snookers_SnookerId">
+            <End Role="Snookers" EntitySet="Snookers" />
+            <End Role="Reservations" EntitySet="Reservations" />
+          </AssociationSet>
+          <AssociationSet Name="Reservations_Users_UserId" Association="Self.Reservations_Users_UserId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Reservations" EntitySet="Reservations" />
+          </AssociationSet>
+          <AssociationSet Name="Snookers_Spaces_SpaceId" Association="Self.Snookers_Spaces_SpaceId">
+            <End Role="Spaces" EntitySet="Spaces" />
+            <End Role="Snookers" EntitySet="Snookers" />
+          </AssociationSet>
+          <AssociationSet Name="Snookers_Users_UserId" Association="Self.Snookers_Users_UserId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Snookers" EntitySet="Snookers" />
+          </AssociationSet>
+          <AssociationSet Name="Spaces_Users_UserId" Association="Self.Spaces_Users_UserId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Spaces" EntitySet="Spaces" />
+          </AssociationSet>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(SportsVenueBookingModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(SportsVenueBookingModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+        </EntityContainer>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SportsVenueBookingModelStoreContainer" CdmEntityContainer="SportsVenueBookingEntities">
+          <EntitySetMapping Name="Durations">
+            <EntityTypeMapping TypeName="SportsVenueBookingModel.Duration">
+              <MappingFragment StoreEntitySet="Durations">
+                <ScalarProperty Name="duration_Id" ColumnName="duration_Id" />
+                <ScalarProperty Name="duration_Name" ColumnName="duration_Name" />
+                <ScalarProperty Name="duration_StartTime" ColumnName="duration_StartTime" />
+                <ScalarProperty Name="duration_EndTime" ColumnName="duration_EndTime" />
+                <ScalarProperty Name="duration_User" ColumnName="duration_User" />
+                <ScalarProperty Name="duration_IsDel" ColumnName="duration_IsDel" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reservations">
+            <EntityTypeMapping TypeName="SportsVenueBookingModel.Reservation">
+              <MappingFragment StoreEntitySet="Reservations">
+                <ScalarProperty Name="reservation_Id" ColumnName="reservation_Id" />
+                <ScalarProperty Name="reservation_User" ColumnName="reservation_User" />
+                <ScalarProperty Name="reservation_StartTime" ColumnName="reservation_StartTime" />
+                <ScalarProperty Name="reservation_EndTime" ColumnName="reservation_EndTime" />
+                <ScalarProperty Name="reservation_IsBilling" ColumnName="reservation_IsBilling" />
+                <ScalarProperty Name="reservation_Snooker" ColumnName="reservation_Snooker" />
+                <ScalarProperty Name="reservation_IsDel" ColumnName="reservation_IsDel" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Snookers">
+            <EntityTypeMapping TypeName="SportsVenueBookingModel.Snooker">
+              <MappingFragment StoreEntitySet="Snookers">
+                <ScalarProperty Name="snooker_Id" ColumnName="snooker_Id" />
+                <ScalarProperty Name="snooker_Space" ColumnName="snooker_Space" />
+                <ScalarProperty Name="snooker_Number" ColumnName="snooker_Number" />
+                <ScalarProperty Name="snooker_User" ColumnName="snooker_User" />
+                <ScalarProperty Name="snooker_Price" ColumnName="snooker_Price" />
+                <ScalarProperty Name="snooker_IsDel" ColumnName="snooker_IsDel" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Spaces">
+            <EntityTypeMapping TypeName="SportsVenueBookingModel.Space">
+              <MappingFragment StoreEntitySet="Spaces">
+                <ScalarProperty Name="space_Id" ColumnName="space_Id" />
+                <ScalarProperty Name="space_User" ColumnName="space_User" />
+                <ScalarProperty Name="space_Name" ColumnName="space_Name" />
+                <ScalarProperty Name="space_IsDel" ColumnName="space_IsDel" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="SportsVenueBookingModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="SportsVenueBookingModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="user_Id" ColumnName="user_Id" />
+                <ScalarProperty Name="user_UserNumber" ColumnName="user_UserNumber" />
+                <ScalarProperty Name="user_Password" ColumnName="user_Password" />
+                <ScalarProperty Name="user_Type" ColumnName="user_Type" />
+                <ScalarProperty Name="user_Class" ColumnName="user_Class" />
+                <ScalarProperty Name="user_Name" ColumnName="user_Name" />
+                <ScalarProperty Name="user_Status" ColumnName="user_Status" />
+                <ScalarProperty Name="user_Remark" ColumnName="user_Remark" />
+                <ScalarProperty Name="user_IsDel" ColumnName="user_IsDel" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="SportsVenueBookingModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="SportsVenueBookingModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="SportsVenueBookingModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="SportsVenueBookingModel.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SportsVenueBookingModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="SportsVenueBookingModel.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SportsVenueBookingModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="SportsVenueBookingModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="SportsVenueBookingModel.Store.sp_upgraddiagrams" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,285 @@
+﻿.nav {
+    list-style: none;
+    margin: 0px;
+    margin-top: 12px;
+    margin-left: -26px;
+}
+
+    .nav > li {
+        width: 90%;
+        height: 20px;
+        margin-top: 15px;
+        padding-top: 8px;
+        text-align: center;
+        cursor: pointer;
+        -moz-user-select: none; /*火狐*/
+        -webkit-user-select: none; /*webkit浏览器*/
+        -ms-user-select: none; /*IE10*/
+        -khtml-user-select: none; /*早期浏览器*/
+        user-select: none;
+        background-color: #E5EEF7;
+        /*padding: 5px 0;
+                cursor: pointer;
+                margin: 0px;
+                width: 88%;*/
+    }
+
+        .nav > li:hover {
+            color: #ff6a00;
+        }
+
+.action {
+    border: 1px solid #928a04;
+    background: #e2d108;
+}
+
+    .action:hover {
+        color: #000;
+    }
+
+.liimage {
+    vertical-align: middle;
+    margin-top: -5px;
+    margin-right: 2px;
+}
+
+.quick-sear-box {
+    padding: 12px 10px;
+}
+
+.sear-box {
+    height: 48px;
+    padding: 7px 10px;
+    background: #eef1f8;
+    font-size: 12px;
+    border: 1px solid #298cce;
+    margin-top: 10px;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -o-border-radius: 3px;
+    -webkit-border-radius: 3px;
+}
+
+form {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    list-style: none;
+    display: block;
+}
+
+.quick-sear-box .s-info {
+    float: left;
+    margin-right: 15px;
+}
+
+.s-info ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+.quick-sear-box .s-info li {
+    width: 194px;
+}
+
+.s-info li {
+    float: left;
+    height: 30px;
+    line-height: 30px;
+    padding: 10px 0;
+    white-space: nowrap;
+}
+
+.quick-sear-box .quick-s {
+    float: right;
+    width: 184px;
+    height: 58px;
+    overflow: hidden;
+    background: url(../images/line_sear.png) left center no-repeat;
+    padding-left: 15px;
+    margin-top: -5px;
+    margin-right: 200px;
+}
+
+.sear-box .label {
+    display: block;
+    width: 60px;
+    float: left;
+    margin: 0;
+    padding: 0;
+    padding-right: 2px;
+    text-align: right;
+}
+
+a {
+    color: #07f;
+    text-decoration: none;
+    outline: 0;
+}
+
+#start_date {
+    width: 113px;
+    height: 18px;
+    line-height: 18px;
+    border: 1px solid #cfcdc7;
+    background: #fff;
+    padding: 5px 0 5px 5px;
+    color: #333;
+}
+
+#end_date {
+    width: 113px;
+    height: 18px;
+    line-height: 18px;
+    border: 1px solid #cfcdc7;
+    background: #fff;
+    padding: 5px 0 5px 5px;
+    color: #333;
+}
+
+.btn-area {
+    margin-top: 15px;
+    float: right;
+}
+
+.btn92s {
+    width: 92px;
+}
+
+.btn92, .btn92s, .btn72, .btn72-no, .btn122, .btn122s, .btn200, .btn200s, .btn-login, .btn30, .btn30s, .btn-disabled {
+    display: inline-block;
+    text-align: center;
+    background: url(/Themes/Images/bg_btn.png) 0px 55px repeat-x;
+    color: #333;
+    border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 4px;
+    -webkit-border-radius: 4px;
+}
+
+.btn92s, .btn122s, .btn200s, .btn30s {
+    height: 30px;
+    line-height: 30px;
+    background-position: 0 0;
+    color: #fff;
+}
+
+    .btn92s:hover {
+        background: url(/Themes/Images/bg_btn.png) repeat-x;
+        background-position: 0px 55px;
+    }
+
+.sear-sel-hd, .per-ticket th, .table-a th, .t-list-hd, .up-box-hd, .layout, .slideTxt, .guide-nav {
+    background: url(/Themes/Images/bg.png) repeat-x;
+}
+
+.sear-sel {
+    margin-top: 10px;
+    position: relative;
+}
+
+.sear-sel-hd {
+    height: 28px;
+    border: 1px solid #999;
+    border-bottom: 0;
+    color: #333;
+    background-position: 0 -100px;
+    position: relative;
+    z-index: 100;
+}
+
+.clear {
+    clear: both;
+    height: 0;
+    line-height: 0;
+    margin: 0 auto;
+    font-size: 1px;
+}
+
+.quick-buy-open {
+    padding-bottom: 30px;
+}
+
+.sear-sel-bd {
+    border: 1px solid #3391d0;
+    height: 44px;
+    overflow: hidden;
+    position: relative;
+    padding: 3px 0;
+}
+
+.sear-sel .section-hd {
+    width: 80px;
+    height: 18px;
+    line-height: 18px;
+    padding: 2px 0;
+    float: left;
+    text-align: right;
+    font-weight: 700;
+}
+
+.sear-sel .section-bd {
+    float: left;
+    width: 898px;
+    position: relative;
+}
+
+.sear-sel .btn-all {
+    display: block;
+    width: 33px;
+    height: 18px;
+    line-height: 18px;
+    padding: 2px 0;
+    font-size: 12px;
+    background-position: 0 -347px;
+    float: left;
+    margin-right: 10px;
+    text-align: center;
+    color: #fff;
+    overflow: hidden;
+    text-indent: -9999px;
+    background: url(Themes/Images/bg02.png) repeat-x;
+}
+
+.sear-sel .section-bd ul {
+    float: left;
+    width: 850px;
+    margin: 0px;
+    padding: 0px;
+}
+
+.sear-sel .section-bd li {
+    float: left;
+    width: 112px;
+    height: 18px;
+    line-height: 18px;
+    padding: 2px 0;
+    overflow: hidden;
+    width: 95px;
+}
+
+.clearfix:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+
+.check {
+    vertical-align: -3px;
+    _vertical-align: middle;
+    margin-right: 4px;
+}
+
+#from_station_ul li {
+    width: 170px;
+}
+
+.t-list {
+    border: 1px solid #298cce;
+    margin-top: 10px;
+}

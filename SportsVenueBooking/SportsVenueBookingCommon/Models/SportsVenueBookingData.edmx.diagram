@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="4a31fc4ce495467ba81179a216a609dc" Name="Diagram1">
+        <EntityTypeShape EntityType="SportsVenueBookingModel.Duration" Width="1.5" PointX="3" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SportsVenueBookingModel.Reservation" Width="1.5" PointX="3" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SportsVenueBookingModel.Snooker" Width="1.5" PointX="5.25" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SportsVenueBookingModel.Space" Width="1.5" PointX="3" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SportsVenueBookingModel.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SportsVenueBookingModel.User" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
+        <AssociationConnector Association="SportsVenueBookingModel.Durations_Users_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="SportsVenueBookingModel.Reservations_Snookers_SnookerId" ManuallyRouted="false" />
+        <AssociationConnector Association="SportsVenueBookingModel.Reservations_Users_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="SportsVenueBookingModel.Snookers_Spaces_SpaceId" ManuallyRouted="false" />
+        <AssociationConnector Association="SportsVenueBookingModel.Snookers_Users_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="SportsVenueBookingModel.Spaces_Users_UserId" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

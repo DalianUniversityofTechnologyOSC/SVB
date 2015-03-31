@@ -1,0 +1,129 @@
+﻿<div class="sear-box quick-sear-box">
+    <form id="queryLeftForm" method="get" enctype="application/x-www-form-urlencoded">
+        <div class="s-info" id="place_area">
+            <ul>
+                <li>
+                    <span class="label"> 开始日期</span>
+                    <div class="inp-w" style="z-index:1200">
+                        <input id="start_date" type="text" required="required" />
+                        <span id="date_icon_1" class="i-date"></span>
+                    </div>
+                </li>
+                <li>
+                    <span class="label"> 结束日期</span>
+                    <div class="inp-w" id="back_div" style="z-index:1100">
+                        <input id="end_date" type="text" required="required" />
+                        <span id="date_icon_2" class="i-date"></span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="quick-s">
+            <div class="btn-area">
+                <a href="javascript:" id="query_ticket" class="btn92s" shape="rect">查询</a>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="sear-sel" id="sear-sel">
+    <div id="date_range" class="sear-sel-hd clearfix">
+        <div class="clear"></div>
+    </div>
+    <div class="sear-sel-bd quick-buy-sel quick-buy-open" id="sear-sel-bd" style="height: 47px">
+        <div class="section clearfix">
+            <div class="section-hd">预约条件：</div>
+            <div class="section-bd" id="cc_train_type_btn_all">
+                <ul id="_ul_station_train_code">
+                    <li>
+                        <input name="cc_type" type="radio" class="check" checked="checked" id="checkbox_19vzrLtiC0">
+                        <label for="checkbox_19vzrLtiC3" style="cursor: pointer;">全部</label>
+                    </li>
+                    <li>
+                        <input name="cc_type" type="radio" class="check" id="checkbox_19vzrLtiC1">
+                        <label for="checkbox_19vzrLtiC3" style="cursor: pointer;">全部空闲</label>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="section clearfix">
+            <div class="section-hd">场地条件：</div>
+            <div class="section-bd" id="cc_from_station_name_all">
+                <ul id="from_station_ul">
+                    <li>
+                        <label>
+                            场地类型
+                        </label>
+                        <select class="select-small">
+                            <option value="0">全部</option>
+                            <option value="00002400">篮球场</option>
+                            <option value="00000600">足球场</option>
+                            <option value="06001200">网球场</option>
+                            <option value="12001800">兵乓球场</option>
+                            <option value="18002400">羽毛球场</option>
+                        </select>
+                    </li>
+                    <li>
+                        <label>
+                            课程时间
+                        </label>
+                        <select class="select-small">
+                            <option value="0">全部</option>
+                            <option value="00002400">1-2节</option>
+                            <option value="00000600">3-4节</option>
+                            <option value="06001200">5-6节</option>
+                            <option value="12001800">7-8节</option>
+                            <option value="18002400">9-10节</option>
+                        </select>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="t-list" id="t-list">
+    <table id="dg"></table>
+</div>
+
+<script type="text/javascript">
+    $('#start_date').datebox({
+        required: true
+    });
+    $('#end_date').datebox({
+        required: true
+    });
+    $('#dg').datagrid({
+        striped: true,
+        rownumbers: true,
+        fitColumns: true,
+        columns: [[
+            { field: 'id', title: 'id', hidden: true },
+            { field: 'time', title: '课程时间', width: 100 },
+            { field: 'type', title: '场地类型', width: 100 },
+            { field: 'idle', title: '空闲天数', width: 100 },
+            { field: 'appointment', title: '已预约天数', width: 100 },
+            { field: 'isAllIdle', title: '是否全部空闲', width: 100 },
+            { field: 'seach', title: '查看已预约情况', width: 100 },
+            { field: 'remarks', title: '备注', width: 100 }
+        ]]
+    });
+    $("#query_ticket").click(function ()
+    {
+        $.ajax({
+            type: "post",
+            url: "/Teacher/GetAppointmentInfo",
+            data: {
+                startDate: "2015-03-31",
+                endDate: "2015-05-31",
+                conditions: 0,
+                type: 0,
+                time: 0
+            },
+            success: function (data)
+            {
+                alert(data);
+            }
+        });
+    });
+</script>

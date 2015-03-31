@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SportsVenueBookingUI", "SportsVenueBooking\SportsVenueBookingUI.csproj", "{391CAE62-FF72-436D-AF3D-1ACCA83BD36A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SportsVenueBooking.Tests", "SportsVenueBooking.Tests\SportsVenueBooking.Tests.csproj", "{8B723A0F-7DD9-4004-ABA9-9D0E9D73B19C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SportsVenueBookingBLL", "SportsVenueBookingBLL\SportsVenueBookingBLL.csproj", "{CE622471-FCA9-47F5-AE02-F09B8E79C2B5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SportsVenueBookingDAL", "SportsVenueBookingDAL\SportsVenueBookingDAL.csproj", "{FEE8B520-475E-463A-8C93-A6507D0DE2D3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SportsVenueBookingCommon", "SportsVenueBookingCommon\SportsVenueBookingCommon.csproj", "{55DD36FC-3C85-4D5B-AB6B-319029881E08}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{391CAE62-FF72-436D-AF3D-1ACCA83BD36A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{391CAE62-FF72-436D-AF3D-1ACCA83BD36A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{391CAE62-FF72-436D-AF3D-1ACCA83BD36A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{391CAE62-FF72-436D-AF3D-1ACCA83BD36A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B723A0F-7DD9-4004-ABA9-9D0E9D73B19C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B723A0F-7DD9-4004-ABA9-9D0E9D73B19C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B723A0F-7DD9-4004-ABA9-9D0E9D73B19C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B723A0F-7DD9-4004-ABA9-9D0E9D73B19C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE622471-FCA9-47F5-AE02-F09B8E79C2B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE622471-FCA9-47F5-AE02-F09B8E79C2B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE622471-FCA9-47F5-AE02-F09B8E79C2B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE622471-FCA9-47F5-AE02-F09B8E79C2B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FEE8B520-475E-463A-8C93-A6507D0DE2D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FEE8B520-475E-463A-8C93-A6507D0DE2D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FEE8B520-475E-463A-8C93-A6507D0DE2D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FEE8B520-475E-463A-8C93-A6507D0DE2D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55DD36FC-3C85-4D5B-AB6B-319029881E08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55DD36FC-3C85-4D5B-AB6B-319029881E08}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55DD36FC-3C85-4D5B-AB6B-319029881E08}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55DD36FC-3C85-4D5B-AB6B-319029881E08}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
