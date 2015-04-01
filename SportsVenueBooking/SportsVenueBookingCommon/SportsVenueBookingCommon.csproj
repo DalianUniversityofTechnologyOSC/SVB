@@ -91,6 +91,7 @@
     <Compile Include="StatusAttribute.cs" />
     <Compile Include="stringExpansion.cs" />
     <Compile Include="TimeSlot.cs" />
+    <Compile Include="TimeSpanExpansion.cs" />
     <Compile Include="UserAuthorization.cs" />
     <Compile Include="Enum.cs" />
   </ItemGroup>

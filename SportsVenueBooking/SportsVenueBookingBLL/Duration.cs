@@ -6,8 +6,13 @@ using System.Text;
 
 namespace SportsVenueBookingBLL
 {
+    #region Duration逻辑操作类+public class Duration : BaseBLL<SportsVenueBookingCommon.Models.Duration>
+    /// <summary>
+    /// Duration逻辑操作类
+    /// </summary>
     public class Duration : BaseBLL<SportsVenueBookingCommon.Models.Duration>
     {
+        #region 根据课程时间Id获取课程信息+public List<SportsVenueBookingCommon.Models.Duration> GetDurationInfo(string tId)
         /// <summary>
         /// 根据课程时间Id获取课程信息
         /// </summary>
@@ -25,7 +30,9 @@ namespace SportsVenueBookingBLL
                 return base.Search(d => d.duration_Id == id && d.duration_IsDel == false);
             }
         }
+        #endregion
 
+        #region 获取某一课程的时间段+public TimeSlot GetDurationTimeSlot(string tId, string startDate, string endDate)
         /// <summary>
         /// 获取某一课程的时间段
         /// </summary>
@@ -38,13 +45,26 @@ namespace SportsVenueBookingBLL
             List<SportsVenueBookingCommon.Models.Duration> durations = this.GetDurationInfo(tId);
             TimeSlot ts = new TimeSlot();
             ts.IsGlobalDate = true;
-            ts.StartDate = new DateTime(Convert.ToInt64(new DateTime(1970, 1, 1, 8, 0, 0).Ticks) + Convert.ToInt64(startDate.RemoveChar('/').RemoveChar(':')));
-            ts.EndDate = new DateTime(Convert.ToInt64(new DateTime(1970, 1, 1, 8, 0, 0).Ticks) + Convert.ToInt64(endDate.RemoveChar('/').RemoveChar(':')));
+            ts.StartDate = startDate.ToDateTime();
+            ts.EndDate = endDate.ToDateTime();
             foreach (SportsVenueBookingCommon.Models.Duration d in durations)
             {
                 ts.Add(d.duration_StartTime, d.duration_EndTime);
             }
             return ts;
         }
+        #endregion
+
+        #region 获取所有课程时间+public List<SportsVenueBookingCommon.Models.Duration> GetDurationList()
+        /// <summary>
+        /// 获取所有课程时间
+        /// </summary>
+        /// <returns>课程时间集合</returns>
+        public List<SportsVenueBookingCommon.Models.Duration> GetAllDuration()
+        {
+            return base.Search(d => d.duration_IsDel == false);
+        }
+        #endregion
     }
+    #endregion
 }

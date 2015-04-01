@@ -11,11 +11,18 @@ using System.Text;
 
 namespace SportsVenueBookingCommon
 {
+    #region 枚举类+public class Enum
+    /// <summary>
+    /// 枚举类
+    /// </summary>
     public class Enum
     {
+        #region 用户枚举+public enum userType { admin, student, teacher, outside };
         /// <summary>
         /// 用户枚举
         /// </summary>
-        public enum userType { admin,student,teacher,outside};
+        public enum userType { admin, student, teacher, outside };
+        #endregion
     }
+    #endregion
 }

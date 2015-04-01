@@ -19,5 +19,10 @@ namespace SportsVenueBookingBLL
                 return base.Search(d => d.space_IsDel == false && d.space_Id == spaceId);
             }
         }
+
+        public List<SportsVenueBookingCommon.Models.Space> GetAllSpace()
+        {
+            return base.Search(d => d.space_IsDel == false);
+        }
     }
 }

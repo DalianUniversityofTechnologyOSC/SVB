@@ -47,6 +47,8 @@ namespace SportsVenueBooking.Controllers
         [HttpPost]
         public PartialViewResult BookingSite()
         {
+            ViewBag.spaces = new Space().GetAllSpace();
+            ViewBag.durations = new Duration().GetAllDuration();
             return PartialView();
         }
 
@@ -63,6 +65,12 @@ namespace SportsVenueBooking.Controllers
         public string GetAppointmentInfo(string startDate, string endDate, string conditions, string type, string time)
         {
             return new Reservation().GetAppointmentInfo(startDate, endDate, conditions, type, time);
+        }
+
+        [HttpPost]
+        public JsonResult ReservationIn(string duration, string space, string start, string end)
+        {
+            return Json(new Reservation().ReservationIn(duration, space, start, end, HttpContext.Session["techer"].ToString()));
         }
     }
 }

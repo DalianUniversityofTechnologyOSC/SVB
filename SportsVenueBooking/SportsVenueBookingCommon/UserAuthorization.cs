@@ -13,11 +13,13 @@ using System.Web.Mvc;
 
 namespace SportsVenueBookingCommon
 {
+    #region 权限验证类+public class UserAuthorization : AuthorizeAttribute
     /// <summary>
     /// 权限验证类
     /// </summary>
     public class UserAuthorization : AuthorizeAttribute
     {
+        #region 初始化权限验证类+public UserAuthorization(string permissionName = "", string url = "")
         /// <summary>
         /// 初始化权限验证类
         /// </summary>
@@ -28,17 +30,23 @@ namespace SportsVenueBookingCommon
             this.PermissionName = permissionName;
             this.Url = url;
         }
+        #endregion
 
+        #region 权限名称+public string PermissionName { get; private set; }
         /// <summary>
         /// 权限名称
         /// </summary>
         public string PermissionName { get; private set; }
+        #endregion
 
+        #region 重定向路径+ public string Url { get; set; }
         /// <summary>
         /// 重定向路径
         /// </summary>
         public string Url { get; set; }
+        #endregion
 
+        #region 验证用户是否授权+protected override bool AuthorizeCore(HttpContextBase httpContext)
         /// <summary>
         /// 验证用户是否授权
         /// </summary>
@@ -56,7 +64,9 @@ namespace SportsVenueBookingCommon
             }
             return false;
         }
+        #endregion
 
+        #region 重写OnAuthorization方法，完成未授权用重定向登陆页+public override void OnAuthorization(AuthorizationContext filterContext)
         /// <summary>
         /// 重写OnAuthorization方法，完成未授权用重定向登陆页
         /// </summary>
@@ -69,5 +79,7 @@ namespace SportsVenueBookingCommon
                 filterContext.Result = new RedirectResult(this.Url);
             }
         }
-    }
+        #endregion
+    } 
+    #endregion
 }

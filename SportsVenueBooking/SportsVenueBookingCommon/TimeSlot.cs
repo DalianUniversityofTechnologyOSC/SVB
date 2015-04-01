@@ -11,26 +11,34 @@ using System.Text;
 
 namespace SportsVenueBookingCommon
 {
+    #region 时间段，表示一组时间开始到结束+public class TimeSlot
     /// <summary>
     /// 时间段，表示一组时间开始到结束
     /// </summary>
     public class TimeSlot
     {
+        #region 时间组，用于比较的时间聚合+List<DateTime[]> timeSlot = new List<DateTime[]>();
         /// <summary>
         /// 时间组，用于比较的时间聚合
         /// </summary>
         List<DateTime[]> timeSlot = new List<DateTime[]>();
+        #endregion
 
+        #region 是否全部时间组使用同一日期+public bool IsGlobalDate = false;
         /// <summary>
         /// 是否全部时间组使用同一日期
         /// </summary>
         public bool IsGlobalDate = false;
+        #endregion
 
+        #region 全局日期开始时间，IsGloal=true有效+DateTime startDate = new DateTime();
         /// <summary>
         /// 全局日期开始时间，IsGloal=true有效
         /// </summary>
         DateTime startDate = new DateTime();
+        #endregion
 
+        #region 开始日期set,get方法+public DateTime StartDate
         /// <summary>
         /// 开始日期set,get方法
         /// </summary>
@@ -38,16 +46,9 @@ namespace SportsVenueBookingCommon
         {
             set
             {
-                if (endDate != null)
+                if (value.CompareTo(endDate) >= 0)
                 {
-                    if (value.CompareTo(endDate) >= 0)
-                    {
-                        this.startDate = this.endDate;
-                    }
-                    else
-                    {
-                        startDate = value;
-                    }
+                    this.startDate = this.endDate;
                 }
                 else
                 {
@@ -59,14 +60,16 @@ namespace SportsVenueBookingCommon
                 return startDate;
             }
         }
+        #endregion
 
-
-
+        #region 全局日期结束时间，IsGloal=true有效+DateTime endDate = new DateTime();
         /// <summary>
         /// 全局日期结束时间，IsGloal=true有效
         /// </summary>
-        DateTime endDate = new DateTime();
+        DateTime endDate = new DateTime(9999, 9, 9);
+        #endregion
 
+        #region 结束日期get,set方法+public DateTime EndDate
         /// <summary>
         /// 结束日期get,set方法
         /// </summary>
@@ -74,20 +77,13 @@ namespace SportsVenueBookingCommon
         {
             set
             {
-                if (endDate != null)
+                if (value.CompareTo(startDate) <= 0)
                 {
-                    if (value.CompareTo(startDate) <= 0)
-                    {
-                        this.endDate = this.startDate;
-                    }
-                    else
-                    {
-                        startDate = value;
-                    }
+                    this.endDate = this.startDate;
                 }
                 else
                 {
-                    startDate = value;
+                    endDate = value;
                 }
             }
             get
@@ -95,7 +91,9 @@ namespace SportsVenueBookingCommon
                 return this.endDate;
             }
         }
+        #endregion
 
+        #region 添加时间组成员+public void Add(TimeSpan startTime, TimeSpan endTime)
         /// <summary>
         /// 添加时间组成员
         /// </summary>
@@ -106,12 +104,11 @@ namespace SportsVenueBookingCommon
             if (IsGlobalDate)
             {
                 DateTime tempDate = startDate;
-                for (int i = 0; tempDate.CompareTo(endDate) >= 0; i++)
+                for (; tempDate.CompareTo(endDate) <= 0; tempDate = tempDate.AddDays(1))
                 {
-                    DateTime d_s = new DateTime(Convert.ToInt64(new DateTime(1970, 1, 1, 8, 0, 0).Ticks) + Convert.ToInt64(tempDate.ToString().RemoveChar(':').RemoveChar('/')) + Convert.ToInt64(startTime.ToString().RemoveChar(':').RemoveChar('/')));
-                    DateTime d_e = new DateTime(Convert.ToInt64(new DateTime(1970, 1, 1, 8, 0, 0).Ticks) + Convert.ToInt64(tempDate.ToString().RemoveChar(':').RemoveChar('/')) + Convert.ToInt64(endTime.ToString().RemoveChar(':').RemoveChar('/')));
-                    DateTime[] d = new DateTime[2] { d_s, d_e };
+                    DateTime[] d = new DateTime[2] { startTime.ToDateTime(tempDate), endTime.ToDateTime(tempDate) };
                     timeSlot.Add(d);
+                    ;
                 }
             }
             else
@@ -120,7 +117,9 @@ namespace SportsVenueBookingCommon
                 timeSlot.Add(dateTime);
             }
         }
+        #endregion
 
+        #region 判断某一时间是否包含于某一时间组中+public bool IsContain(DateTime time)
         /// <summary>
         /// 判断某一时间是否包含于某一时间组中
         /// </summary>
@@ -137,7 +136,9 @@ namespace SportsVenueBookingCommon
             }
             return false;
         }
+        #endregion
 
+        #region 清空时间组+public void Clear()
         /// <summary>
         /// 清空时间组
         /// </summary>
@@ -145,5 +146,7 @@ namespace SportsVenueBookingCommon
         {
             timeSlot.Clear();
         }
+        #endregion
     }
+    #endregion
 }

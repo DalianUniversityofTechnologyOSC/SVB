@@ -11,11 +11,13 @@ using System.Text;
 
 namespace SportsVenueBookingCommon
 {
+    #region string扩展类+public static class StringExpansion
     /// <summary>
     /// string扩展类
     /// </summary>
     public static class StringExpansion
     {
+        #region 去除string类型中指定的字符+public static string RemoveChar(this string str, char ch)
         /// <summary>
         /// 去除string类型中指定的字符
         /// </summary>
@@ -32,5 +34,20 @@ namespace SportsVenueBookingCommon
             }
             return newStr;
         }
+        #endregion
+
+        #region 将string类型转换成DateTime类型+public static DateTime ToDateTime(this string str)
+        /// <summary>
+        /// 将string类型转换成DateTime类型
+        /// </summary>
+        /// <param name="str">要转换的string类型</param>
+        /// <returns>转换后的DateTime对象</returns>
+        public static DateTime ToDateTime(this string str)
+        {
+            string[] strArr = str.Split('/');
+            return new DateTime(Convert.ToInt32(strArr[0]), Convert.ToInt32(strArr[1]), Convert.ToInt32(strArr[2]));
+        }
+        #endregion
     }
+    #endregion
 }

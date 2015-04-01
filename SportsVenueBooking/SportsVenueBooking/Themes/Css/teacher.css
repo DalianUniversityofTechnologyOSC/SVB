@@ -283,3 +283,12 @@ a {
     border: 1px solid #298cce;
     margin-top: 10px;
 }
+
+.btn72, .btn72-no {
+    height: 30px;
+    line-height: 30px;
+    width: 72px;
+    background-position: 0 -250px;
+    color: #fff;
+    cursor: pointer;
+}

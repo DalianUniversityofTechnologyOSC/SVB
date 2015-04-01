@@ -36,11 +36,11 @@
             <div class="section-bd" id="cc_train_type_btn_all">
                 <ul id="_ul_station_train_code">
                     <li>
-                        <input name="cc_type" type="radio" class="check" checked="checked" id="checkbox_19vzrLtiC0">
+                        <input name="cc_type" type="radio" class="check" value="0" checked="checked" id="checkbox_19vzrLtiC0">
                         <label for="checkbox_19vzrLtiC3" style="cursor: pointer;">全部</label>
                     </li>
                     <li>
-                        <input name="cc_type" type="radio" class="check" id="checkbox_19vzrLtiC1">
+                        <input name="cc_type" type="radio" class="check" value="1" id="checkbox_19vzrLtiC1">
                         <label for="checkbox_19vzrLtiC3" style="cursor: pointer;">全部空闲</label>
                     </li>
                 </ul>
@@ -54,26 +54,24 @@
                         <label>
                             场地类型
                         </label>
-                        <select class="select-small">
+                        <select class="select-small" id="space">
                             <option value="0">全部</option>
-                            <option value="00002400">篮球场</option>
-                            <option value="00000600">足球场</option>
-                            <option value="06001200">网球场</option>
-                            <option value="12001800">兵乓球场</option>
-                            <option value="18002400">羽毛球场</option>
+                            @foreach (SportsVenueBookingCommon.Models.Space s in ViewBag.spaces)
+                            {
+                                <option value="@s.space_Id">@s.space_Name</option>
+                            }
                         </select>
                     </li>
                     <li>
                         <label>
                             课程时间
                         </label>
-                        <select class="select-small">
+                        <select class="select-small" id="duration">
                             <option value="0">全部</option>
-                            <option value="00002400">1-2节</option>
-                            <option value="00000600">3-4节</option>
-                            <option value="06001200">5-6节</option>
-                            <option value="12001800">7-8节</option>
-                            <option value="18002400">9-10节</option>
+                            @foreach (SportsVenueBookingCommon.Models.Duration d in ViewBag.durations)
+                            {
+                                <option value="@d.duration_Id">@d.duration_Name</option>
+                            }
                         </select>
                     </li>
                 </ul>
@@ -88,42 +86,191 @@
 
 <script type="text/javascript">
     $('#start_date').datebox({
-        required: true
+        required: true,
     });
     $('#end_date').datebox({
-        required: true
+        required: true,
     });
     $('#dg').datagrid({
         striped: true,
         rownumbers: true,
         fitColumns: true,
+        url: "/Teacher/GetAppointmentInfo",
+        queryParams: {
+            startDate: "1970/1/1",
+            endDate: "1970/1/1",
+            conditions: 0,
+            type: -1,
+            time: -1
+        },
         columns: [[
             { field: 'id', title: 'id', hidden: true },
             { field: 'time', title: '课程时间', width: 100 },
             { field: 'type', title: '场地类型', width: 100 },
             { field: 'idle', title: '空闲天数', width: 100 },
             { field: 'appointment', title: '已预约天数', width: 100 },
-            { field: 'isAllIdle', title: '是否全部空闲', width: 100 },
-            { field: 'seach', title: '查看已预约情况', width: 100 },
-            { field: 'remarks', title: '备注', width: 100 }
+            { field: 'isAllIdle', title: '是否全部空闲', formatter: getIsAllIdle, width: 100 },
+            { field: 'seach', title: '查看已预约情况', formatter: getIsSearch, width: 100 },
+            { field: 'remarks', title: '备注', align: "center", width: 100, formatter: getButton }
         ]]
     });
+
+    function getIsAllIdle(value)
+    {
+        if (value == "0")
+        {
+            return "否";
+        }
+        else
+        {
+            return "是";
+        }
+    }
+
+    function getIsSearch(value)
+    {
+        if (value == "0")
+        {
+            return "<a href='javascript:submitReser(\"" + value + "\")' id='reser_btn' class=\"btn72\">预约</a>";
+        }
+        else
+        {
+            return "<a disabled='false' class=\"btn72\">预约</a>";
+        }
+    }
+
+    function getButton(value)
+    {
+        if (value != "-1")
+        {
+            return "<a href='javascript:submitReser(\"" + value + "\")' id='reser_btn' class=\"btn72\">预约</a>";
+        }
+        else
+        {
+            return "<a disabled='false' class=\"btn72\">预约</a>";
+        }
+
+    }
+
+    function ToDuble(num)
+    {
+        if (num < 10)
+        {
+            return "0" + num;
+        }
+
+        return num;
+    }
+    var isSearched = false;
     $("#query_ticket").click(function ()
     {
-        $.ajax({
-            type: "post",
-            url: "/Teacher/GetAppointmentInfo",
-            data: {
-                startDate: "2015-03-31",
-                endDate: "2015-05-31",
-                conditions: 0,
-                type: 0,
-                time: 0
-            },
-            success: function (data)
+        if ($("#start_date").datebox("getText") != "" && $("#end_date").datebox("getText") != "")
+        {
+            var startDteArr = $("#start_date").datebox("getText").split('/');
+            var endDateArr = $("#end_date").datebox("getText").split('/');
+            var date = new Date();
+            var today = parseInt("" + date.getFullYear() + ToDuble((date.getMonth() + 1)) + ToDuble(date.getDate()));
+            var start = parseInt(startDteArr[2] + startDteArr[0] + startDteArr[1]);
+            var end = parseInt(endDateArr[2] + endDateArr[0] + endDateArr[1]);
+            if (start >= today)
             {
-                alert(data);
+                if (start <= end)
+                {
+                    isSearched = true;
+                    getData();
+                }
+                else
+                {
+                    $.messager.alert('错误', '结束时间必须大于等于开始时间！', 'error');
+                }
             }
-        });
+            else
+            {
+                $.messager.alert('错误', '开始时间必须大于等于当前时间！', 'error');
+            }
+        }
+        else
+        {
+            $.messager.alert('错误', '开始时间和结束时间不能为空！', 'error');
+        }
     });
+
+    $("#space").change(function ()
+    {
+        if (isSearched)
+        {
+            getData();
+        }
+
+    })
+
+    $("#duration").change(function ()
+    {
+        if (isSearched)
+        {
+            getData();
+        }
+    });
+
+    $("input[name=cc_type]").change(function ()
+    {
+        if (isSearched)
+        {
+            getData();
+        }
+    })
+
+    function getData()
+    {
+        var startDteArr = $("#start_date").datebox("getText").split('/');
+        var endDateArr = $("#end_date").datebox("getText").split('/');
+        var start = startDteArr[2] + "/" + startDteArr[0] + "/" + startDteArr[1];
+        var end = endDateArr[2] + "/" + endDateArr[0] + "/" + endDateArr[1];
+        $('#dg').datagrid('load', {
+            startDate: start,
+            endDate: end,
+            conditions: $("input[name=cc_type]:checked").val(),
+            type: $("#space").val(),
+            time: $("#duration").val()
+        });
+    }
+
+    function submitReser(info)
+    {
+        $.messager.confirm("请确认...", "请再次确认你的预约！你确定预约吗？", function (r)
+        {
+            if (r)
+            {
+                $.messager.progress({ title: "预约中...", msg: "玩命预约中，请稍后...", text: "请稍后..." });
+                var res_info = info.split('/');
+                var startDteArr = $("#start_date").datebox("getText").split('/');
+                var endDateArr = $("#end_date").datebox("getText").split('/');
+                var start = startDteArr[2] + "/" + startDteArr[0] + "/" + startDteArr[1];
+                var end = endDateArr[2] + "/" + endDateArr[0] + "/" + endDateArr[1];
+                $.ajax({
+                    type: "post",
+                    url: "/Teacher/ReservationIn",
+                    data: {
+                        duration: res_info[0],
+                        space: res_info[1],
+                        start: start,
+                        end: end
+                    },
+                    success: function (data)
+                    {
+                        $.messager.progress('close');
+                        data = JSON.parse(data);
+                        if (data.status)
+                        {
+                            $.messager.alert('消息', data.message, 'ok');
+                        }
+                        else
+                        {
+                            $.messager.alert('消息', data.message, 'error');
+                        }
+                    }
+                });
+            }
+        })
+    }
 </script>
