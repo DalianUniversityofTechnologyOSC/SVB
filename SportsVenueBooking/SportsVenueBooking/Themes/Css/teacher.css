@@ -292,3 +292,7 @@ a {
     color: #fff;
     cursor: pointer;
 }
+
+.disabled {
+    background: gray;
+}

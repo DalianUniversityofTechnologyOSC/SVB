@@ -1,0 +1,36 @@
+﻿<table id="seach_dg"></table>
+
+<script type="text/javascript">
+    $('#seach_dg').datagrid({
+        url: '/Teacher/SearchReservationJson',
+        striped: true,
+        rownumbers: true,
+        fitColumns: true,
+        singleSelect: true,
+        fit: true,
+        queryParams: {
+            duration: '@ViewBag.duration',
+            space: '@ViewBag.space',
+            startDate: '@ViewBag.startDate',
+            endDate: '@ViewBag.endDate'
+        },
+        columns: [[
+            { field: 'date', title: '预约日期', width: 100 },
+            { field: 'start', title: '开始时间', width: 100 },
+            { field: 'end', title: '结束时间', width: 100, },
+            { field: 'user', title: '预约人', width: 100, },
+            { field: 'user_type', title: '预约人类型', width: 100, formatter: getUserType }
+        ]]
+    });
+
+    function getUserType(value)
+    {
+        switch (value)
+        {
+            case "0": return "管理员";
+            case "1": return "学生";
+            case "2": return "教师";
+            case "3": return "校外人员";
+        }
+    }
+</script>

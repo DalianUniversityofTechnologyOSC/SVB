@@ -35,7 +35,7 @@ namespace SportsVenueBookingBLL
                     idle = common - busy;
                     if ((conditions == "1" && busy == 0) || conditions == "0")
                     {
-                        sb.Append("{\"id\":\"" + d.duration_Id + "\",\"time\":\"" + d.duration_Name + "\",\"type\":\"" + s.space_Name + "\",\"idle\":\"" + idle + "\",\"appointment\":\"" + busy + "\",\"isAllIdle\":\"" + idle + "\",\"seach\":\"" + idle + "\",\"remarks\":\"" + (idle == 0 ? "-1" : d.duration_Id.ToString() + "/" + s.space_Id) + "\"},");
+                        sb.Append("{\"id\":\"" + d.duration_Id + "\",\"time\":\"" + d.duration_Name + "\",\"type\":\"" + s.space_Name + "\",\"idle\":\"" + idle + "\",\"appointment\":\"" + busy + "\",\"isAllIdle\":\"" + busy + "\",\"seach\":\"" + (busy == 0 ? "0" : d.duration_Id.ToString() + "/" + s.space_Id) + "\",\"remarks\":\"" + (idle == 0 ? "-1" : d.duration_Id.ToString() + "/" + s.space_Id) + "\"},");
                     }
                 }
             }
@@ -98,6 +98,19 @@ namespace SportsVenueBookingBLL
                 res.message = "预约失败！课程时间不存在...";
             }
             return res;
+        }
+
+        public string SearchReservationJson(string duration, string space, string startDate, string endDate)
+        {
+            List<SportsVenueBookingCommon.Models.Duration> durations = new Duration().GetDurationInfo(duration);
+            List<SportsVenueBookingCommon.Models.Reservation> duration_reseration = this.GetDurationAppointInfo(duration, startDate, endDate).Where(d => d.Snooker.Space.space_Id == Convert.ToInt32(space)).ToList();
+            StringBuilder sb = new StringBuilder();
+            sb.Append("[");
+            foreach (SportsVenueBookingCommon.Models.Reservation r in duration_reseration)
+            {
+                sb.Append("{\"date\":\"" + r.reservation_StartTime.Date + "\",\"start\":\"" + r.reservation_StartTime.TimeOfDay + "\",\"end\":\"" + r.reservation_EndTime.TimeOfDay + "\",\"user\":\"" + r.User.user_Name + "\",\"user_type\":\"" + r.User.user_Type + "\"},");
+            }
+            return sb.ToString().Substring(0, sb.Length - 1) + "]";
         }
     }
 }

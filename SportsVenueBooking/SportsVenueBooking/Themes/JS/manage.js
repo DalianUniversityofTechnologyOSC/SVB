@@ -1,6 +1,7 @@
 ﻿$(document).ready(function ()
 {
-    var window_id = "1000";
+    var openWindowList = 0;
+    var window_id = 1000;
     $("li").click(function ()
     {
         $(".nav").find("li").attr("class", "");
@@ -29,14 +30,13 @@
             title: '新选项卡面板',
             selected: true,
             closable: true,
-            tentext: "<div style='windth:180px;margin:auto;margin-top:200px;text-align:center'><img src=\"../../images/loading.gif\"><p>玩命加载中....</p><div>"
+            tentext: "<div style='windth:180px;margin:auto;margin-top:200px;text-align:center'><img src=\"/Themes/Images/loading.gif\"><p>玩命加载中....</p><div>"
         });
 
         $.ajax({
             type: "post",
             url: funname,
             data: {
-                window_id: window_id,
                 parameter0: parameters[0],
                 parameter1: parameters[1],
                 parameter2: parameters[2],
@@ -55,5 +55,20 @@
                 $(id).html(data);
             }
         });
+    }
+    function addOpenWindow(value)
+    {
+        openWindowList[openWindowList.length] = value;
+    }
+
+    function IsOpen(value)
+    {
+        for (var i in openWindowList)
+        {
+            if (openWindowList[i] == value)
+            {
+                return true;
+            }
+        }
     }
 });

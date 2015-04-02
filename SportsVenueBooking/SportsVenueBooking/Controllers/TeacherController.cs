@@ -45,8 +45,9 @@ namespace SportsVenueBooking.Controllers
         /// </summary>
         /// <returns>教师预约界面</returns>
         [HttpPost]
-        public PartialViewResult BookingSite()
+        public PartialViewResult BookingSite(string window_id)
         {
+            ViewBag.windowId = window_id;
             ViewBag.spaces = new Space().GetAllSpace();
             ViewBag.durations = new Duration().GetAllDuration();
             return PartialView();
@@ -67,10 +68,46 @@ namespace SportsVenueBooking.Controllers
             return new Reservation().GetAppointmentInfo(startDate, endDate, conditions, type, time);
         }
 
+        /// <summary>
+        /// 执行预约操作
+        /// </summary>
+        /// <param name="duration">要预约的课程时间</param>
+        /// <param name="space">要预约的场地</param>
+        /// <param name="start">预约开始时间</param>
+        /// <param name="end">预约结束时间</param>
+        /// <returns>预约结果Json字符串</returns>
         [HttpPost]
         public JsonResult ReservationIn(string duration, string space, string start, string end)
         {
             return Json(new Reservation().ReservationIn(duration, space, start, end, HttpContext.Session["techer"].ToString()));
+        }
+
+        /// <summary>
+        /// 返回预约情况页面
+        /// </summary>
+        /// <param name="duration">要查看的课程时间</param>
+        /// <param name="space">要查看的场地</param>
+        /// <returns>预约情况页面</returns>
+        [HttpPost]
+        public PartialViewResult SearchReservation(string duration, string space, string startDate, string endDate)
+        {
+            ViewBag.duration = duration;
+            ViewBag.space = space;
+            ViewBag.startDate = startDate;
+            ViewBag.endDate = endDate;
+            return PartialView();
+        }
+
+        /// <summary>
+        ///查询预约情况数据
+        /// </summary>
+        /// <param name="duration">要查看的课程时间</param>
+        /// <param name="space">要查看的场地</param>
+        /// <returns>预约情况数据</returns>
+        [HttpPost]
+        public string SearchReservationJson(string duration, string space, string startDate, string endDate)
+        {
+            return new Reservation().SearchReservationJson(duration, space, startDate, endDate);
         }
     }
 }

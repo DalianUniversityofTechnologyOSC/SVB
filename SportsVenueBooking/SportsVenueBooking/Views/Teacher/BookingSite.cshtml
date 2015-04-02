@@ -83,7 +83,7 @@
 <div class="t-list" id="t-list">
     <table id="dg"></table>
 </div>
-
+<div id="win"></div>
 <script type="text/javascript">
     $('#start_date').datebox({
         required: true,
@@ -95,6 +95,7 @@
         striped: true,
         rownumbers: true,
         fitColumns: true,
+        singleSelect: true,
         url: "/Teacher/GetAppointmentInfo",
         queryParams: {
             startDate: "1970/1/1",
@@ -119,23 +120,23 @@
     {
         if (value == "0")
         {
-            return "否";
+            return "是";
         }
         else
         {
-            return "是";
+            return "否";
         }
     }
 
     function getIsSearch(value)
     {
-        if (value == "0")
+        if (value != "0")
         {
-            return "<a href='javascript:submitReser(\"" + value + "\")' id='reser_btn' class=\"btn72\">预约</a>";
+            return "<a href='javascript:searchReser(\"" + value + "\")' id='reser_btn' class=\"btn72\">查看</a>";
         }
         else
         {
-            return "<a disabled='false' class=\"btn72\">预约</a>";
+            return "<a disabled='false' class=\"btn72 disabled\">查看</a>";
         }
     }
 
@@ -147,7 +148,7 @@
         }
         else
         {
-            return "<a disabled='false' class=\"btn72\">预约</a>";
+            return "<a disabled='false' class=\"btn72 disabled\">预约</a>";
         }
 
     }
@@ -272,5 +273,28 @@
                 });
             }
         })
+    }
+
+    function searchReser(value)
+    {
+        var res_info = value.split('/');
+        var startDteArr = $("#start_date").datebox("getText").split('/');
+        var endDateArr = $("#end_date").datebox("getText").split('/');
+        var start = startDteArr[2] + "/" + startDteArr[0] + "/" + startDteArr[1];
+        var end = endDateArr[2] + "/" + endDateArr[0] + "/" + endDateArr[1];
+        $('#win').window({
+            title: "查看预约情况",
+            width: 600,
+            height: 400,
+            modal: true,
+            method: "post",
+            href: "/Teacher/SearchReservation",
+            queryParams: {
+                duration: res_info[0],
+                space: res_info[1],
+                startDate: start,
+                endDate: end
+            }
+        });
     }
 </script>
