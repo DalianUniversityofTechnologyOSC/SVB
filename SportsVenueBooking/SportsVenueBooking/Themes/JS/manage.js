@@ -1,12 +1,21 @@
 ﻿$(document).ready(function ()
 {
-    var openWindowList = 0;
+    var openWindowList = new Array();
     var window_id = 1000;
     $("li").click(function ()
     {
         $(".nav").find("li").attr("class", "");
         $(this).attr("class", "action");
-        GetHtmlContext(GetAccessFunction($(this).val()), GetParameters($(this).val()), window_id++);
+        if (!IsOpen($(this).val()))
+        {
+            window_id = $(this).val();
+            GetHtmlContext(GetAccessFunction($(this).val()), GetParameters($(this).val()), window_id, $(this).text());
+            addOpenWindow(window_id);
+        }
+        else
+        {
+            $("#sub_panel").tabs("select", $(this).text());
+        }
     });
     function GetAccessFunction(value)
     {
@@ -23,13 +32,14 @@
         }
         return parameters;
     }
-    function GetHtmlContext(funname, parameters, window_id)
+    function GetHtmlContext(funname, parameters, window_id, title)
     {
         $("#sub_panel").tabs('add', {
             id: window_id,
-            title: '新选项卡面板',
+            title: title,
             selected: true,
             closable: true,
+            onClose:delOpenWindow,
             tentext: "<div style='windth:180px;margin:auto;margin-top:200px;text-align:center'><img src=\"/Themes/Images/loading.gif\"><p>玩命加载中....</p><div>"
         });
 
@@ -68,6 +78,17 @@
             if (openWindowList[i] == value)
             {
                 return true;
+            }
+        }
+    }
+
+    function delOpenWindow(title, index)
+    {
+        for (var i in openWindowList)
+        {
+            if (openWindowList[i] == value)
+            {
+                openWindowList[i] = "";
             }
         }
     }

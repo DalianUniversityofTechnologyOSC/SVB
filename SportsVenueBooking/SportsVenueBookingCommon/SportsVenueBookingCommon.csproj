@@ -94,6 +94,7 @@
     <Compile Include="TimeSpanExpansion.cs" />
     <Compile Include="UserAuthorization.cs" />
     <Compile Include="Enum.cs" />
+    <Compile Include="DayOfWeekExpansion.cs" />
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="Models\SportsVenueBookingData.edmx">

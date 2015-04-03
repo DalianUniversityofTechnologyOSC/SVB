@@ -74,6 +74,21 @@
                             }
                         </select>
                     </li>
+                    <li>
+                        <label>
+                            课程星期
+                        </label>
+                        <select class="select-small" id="weekOfDay">
+                            <option value="-1">全部</option>
+                            <option value="1">周一</option>
+                            <option value="2">周二</option>
+                            <option value="3">周三</option>
+                            <option value="4">周四</option>
+                            <option value="5">周五</option>
+                            <option value="6">周六</option>
+                            <option value="0">周日</option>
+                        </select>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -232,7 +247,8 @@
             endDate: end,
             conditions: $("input[name=cc_type]:checked").val(),
             type: $("#space").val(),
-            time: $("#duration").val()
+            time: $("#duration").val(),
+            weekOfDay: $("#weekOfDay").val()
         });
     }
 

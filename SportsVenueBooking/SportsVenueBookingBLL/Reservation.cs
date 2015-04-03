@@ -6,11 +6,24 @@ using System.Text;
 
 namespace SportsVenueBookingBLL
 {
+    /// <summary>
+    /// 预约表逻辑方法类
+    /// </summary>
     public class Reservation : BaseBLL<SportsVenueBookingCommon.Models.Reservation>
     {
-        public string GetAppointmentInfo(string startDate, string endDate, string conditions, string type, string time)
+        /// <summary>
+        /// 查询一定时段的预约情况
+        /// </summary>
+        /// <param name="startDate">开始时间</param>
+        /// <param name="endDate">结束时间</param>
+        /// <param name="conditions">是否查询全部时间空闲</param>
+        /// <param name="type">场地类型</param>
+        /// <param name="time">课程时间</param>
+        /// <param name="weekOfDay">日期星期</param>
+        /// <returns>预约情况Json数据</returns>
+        public string GetAppointmentInfo(string startDate, string endDate, string conditions, string type, string time, string weekOfDay)
         {
-            List<SportsVenueBookingCommon.Models.Reservation> duration_reseration = this.GetDurationAppointInfo(time, startDate, endDate);
+            List<SportsVenueBookingCommon.Models.Reservation> duration_reseration = this.GetDurationAppointInfo(time, startDate, endDate, weekOfDay);
             List<SportsVenueBookingCommon.Models.Duration> durations = new Duration().GetDurationInfo(time);
             List<SportsVenueBookingCommon.Models.Space> spaces = new Space().GetSpaceList(type);
             StringBuilder sb = new StringBuilder();
@@ -20,7 +33,7 @@ namespace SportsVenueBookingBLL
             ts.EndDate = endDate.ToDateTime();
             int idle = 0;
             int busy = 0;
-            int common = (endDate.ToDateTime() - startDate.ToDateTime()).Days + 1;
+            int common = weekOfDay == "-1" ? (endDate.ToDateTime() - startDate.ToDateTime()).Days + 1 : ((endDate.ToDateTime() - startDate.ToDateTime()).Days + 1) / 7;
             sb.Append("[");
             foreach (SportsVenueBookingCommon.Models.Duration d in durations)
             {
@@ -42,13 +55,31 @@ namespace SportsVenueBookingBLL
             return sb.ToString().Substring(0, sb.ToString().Length - 1) + "]";
         }
 
-        public List<SportsVenueBookingCommon.Models.Reservation> GetDurationAppointInfo(string durationId, string startDate, string endDate)
+        /// <summary>
+        /// 获取预约情况
+        /// </summary>
+        /// <param name="durationId">课程时间</param>
+        /// <param name="startDate">开始时间</param>
+        /// <param name="endDate">结束时间</param>
+        /// <param name="weekOfDay">日期星期</param>
+        /// <returns>预约情况</returns>
+        private List<SportsVenueBookingCommon.Models.Reservation> GetDurationAppointInfo(string durationId, string startDate, string endDate, string weekOfDay)
         {
             TimeSlot ts = new Duration().GetDurationTimeSlot(durationId, startDate, endDate);
-            return base.Search(d => d.reservation_IsDel == false).Where(d => ts.IsContain(d.reservation_StartTime) || ts.IsContain(d.reservation_EndTime)).ToList();
+            return base.Search(d => d.reservation_IsDel == false).Where(d => (ts.IsContain(d.reservation_StartTime) || ts.IsContain(d.reservation_EndTime)) && (d.reservation_StartTime.DayOfWeek.ToInt() == Convert.ToInt32(weekOfDay) || weekOfDay == "-1")).ToList();
         }
 
-        public StatusAttribute ReservationIn(string duration, string space, string start, string end, string userId)
+        /// <summary>
+        /// 添加预约
+        /// </summary>
+        /// <param name="duration">课程时间</param>
+        /// <param name="space">场地</param>
+        /// <param name="start">开始时间</param>
+        /// <param name="end">结束时间</param>
+        /// <param name="userId">预约人</param>
+        /// <param name="dayOfWeek">预约星期数</param>
+        /// <returns>预约结果状态</returns>
+        public StatusAttribute ReservationIn(string duration, string space, string start, string end, string userId, string dayOfWeek)
         {
             StatusAttribute res = new StatusAttribute();
             List<SportsVenueBookingCommon.Models.Duration> d = new Duration().GetDurationInfo(duration);
@@ -100,10 +131,19 @@ namespace SportsVenueBookingBLL
             return res;
         }
 
-        public string SearchReservationJson(string duration, string space, string startDate, string endDate)
+        /// <summary>
+        /// 查询已预约的详细情况
+        /// </summary>
+        /// <param name="duration">课程时间</param>
+        /// <param name="space">场地类型</param>
+        /// <param name="startDate">开始时间</param>
+        /// <param name="endDate">结束时间</param>
+        /// <param name="weekOfDay">星期</param>
+        /// <returns>已预约的情况</returns>
+        public string SearchReservationJson(string duration, string space, string startDate, string endDate, string weekOfDay)
         {
             List<SportsVenueBookingCommon.Models.Duration> durations = new Duration().GetDurationInfo(duration);
-            List<SportsVenueBookingCommon.Models.Reservation> duration_reseration = this.GetDurationAppointInfo(duration, startDate, endDate).Where(d => d.Snooker.Space.space_Id == Convert.ToInt32(space)).ToList();
+            List<SportsVenueBookingCommon.Models.Reservation> duration_reseration = this.GetDurationAppointInfo(duration, startDate, endDate, weekOfDay).Where(d => d.Snooker.Space.space_Id == Convert.ToInt32(space)).ToList();
             StringBuilder sb = new StringBuilder();
             sb.Append("[");
             foreach (SportsVenueBookingCommon.Models.Reservation r in duration_reseration)
