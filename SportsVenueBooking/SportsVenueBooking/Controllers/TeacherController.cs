@@ -61,12 +61,12 @@ namespace SportsVenueBooking.Controllers
         /// <param name="conditions">查询条件</param>
         /// <param name="type">场地类型</param>
         /// <param name="time">课程时间</param>
-        /// <param name="weekOfDay">课程星期</param>
+        /// <param name="dayOfWeek">课程星期</param>
         /// <returns>场地预约情况Json数据</returns>
         [HttpPost]
-        public string GetAppointmentInfo(string startDate, string endDate, string conditions, string type, string time, string weekOfDay)
+        public string GetAppointmentInfo(string startDate, string endDate, string conditions, string type, string time, string dayOfWeek)
         {
-            return new Reservation().GetAppointmentInfo(startDate, endDate, conditions, type, time, weekOfDay);
+            return new Reservation().GetAppointmentInfo(startDate, endDate, conditions, type, time, dayOfWeek);
         }
 
         /// <summary>
@@ -90,12 +90,13 @@ namespace SportsVenueBooking.Controllers
         /// <param name="space">要查看的场地</param>
         /// <returns>预约情况页面</returns>
         [HttpPost]
-        public PartialViewResult SearchReservation(string duration, string space, string startDate, string endDate)
+        public PartialViewResult SearchReservation(string duration, string space, string startDate, string endDate, string dayOfWeek)
         {
             ViewBag.duration = duration;
             ViewBag.space = space;
             ViewBag.startDate = startDate;
             ViewBag.endDate = endDate;
+            ViewBag.dayOfWeek = dayOfWeek;
             return PartialView();
         }
 
@@ -106,9 +107,9 @@ namespace SportsVenueBooking.Controllers
         /// <param name="space">要查看的场地</param>
         /// <returns>预约情况数据</returns>
         [HttpPost]
-        public string SearchReservationJson(string duration, string space, string startDate, string endDate, string weekOfDay)
+        public string SearchReservationJson(string duration, string space, string startDate, string endDate, string dayOfWeek)
         {
-            return new Reservation().SearchReservationJson(duration, space, startDate, endDate, weekOfDay);
+            return new Reservation().SearchReservationJson(duration, space, startDate, endDate, dayOfWeek);
         }
     }
 }

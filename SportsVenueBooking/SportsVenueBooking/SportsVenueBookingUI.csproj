@@ -319,6 +319,7 @@
     <Content Include="Themes\Css\easyui\themes\icon.css" />
     <Content Include="Themes\Css\easyui\themes\icons\back.png" />
     <Content Include="Themes\Css\easyui\themes\icons\blank.gif" />
+    <Content Include="Themes\Images\set.png" />
     <Content Include="Themes\Images\bg.png" />
     <Content Include="Themes\Images\bg02.png" />
     <Content Include="Themes\Images\bg_btn.png" />
@@ -433,7 +434,7 @@
     <Content Include="Themes\JS\easyui\locale\easyui-lang-zh_CN.js" />
     <Content Include="Themes\JS\easyui\locale\easyui-lang-zh_TW.js" />
     <Content Include="Themes\JS\manage.js" />
-    <Content Include="Themes\JS\teacherIndex.js" />
+    <Content Include="Themes\JS\teacher.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

@@ -48,6 +48,21 @@ namespace SportsVenueBookingCommon
             return new DateTime(Convert.ToInt32(strArr[0]), Convert.ToInt32(strArr[1]), Convert.ToInt32(strArr[2]));
         }
         #endregion
+
+        public static DayOfWeek ToDayOfWeek(this string dayOfWeek)
+        {
+            switch (dayOfWeek)
+            {
+                case "0": return DayOfWeek.Sunday;
+                case "1": return DayOfWeek.Monday;
+                case "2": return DayOfWeek.Tuesday;
+                case "3": return DayOfWeek.Wednesday;
+                case "4": return DayOfWeek.Thursday;
+                case "5": return DayOfWeek.Friday;
+                case "6": return DayOfWeek.Saturday;
+                default: return new DayOfWeek();
+            }
+        }
     }
     #endregion
 }

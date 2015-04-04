@@ -102,9 +102,23 @@
 <script type="text/javascript">
     $('#start_date').datebox({
         required: true,
+        onSelect: function ()
+        {
+            if (isSearched)
+            {
+                getData();
+            }
+        }
     });
     $('#end_date').datebox({
         required: true,
+        onSelect: function ()
+        {
+            if (isSearched)
+            {
+                getData();
+            }
+        }
     });
     $('#dg').datagrid({
         striped: true,
@@ -228,6 +242,14 @@
         }
     });
 
+    $("#weekOfDay").change(function ()
+    {
+        if (isSearched)
+        {
+            getData();
+        }
+    });
+
     $("input[name=cc_type]").change(function ()
     {
         if (isSearched)
@@ -271,7 +293,8 @@
                         duration: res_info[0],
                         space: res_info[1],
                         start: start,
-                        end: end
+                        end: end,
+                        dayOfWeek: $("#weekOfDay").val()
                     },
                     success: function (data)
                     {
@@ -309,7 +332,8 @@
                 duration: res_info[0],
                 space: res_info[1],
                 startDate: start,
-                endDate: end
+                endDate: end,
+                dayOfWeek: $("#weekOfDay").val()
             }
         });
     }

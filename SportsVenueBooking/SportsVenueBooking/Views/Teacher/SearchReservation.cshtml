@@ -12,16 +12,37 @@
             duration: '@ViewBag.duration',
             space: '@ViewBag.space',
             startDate: '@ViewBag.startDate',
-            endDate: '@ViewBag.endDate'
+            endDate: '@ViewBag.endDate',
+            dayOfWeek: '@ViewBag.dayOfWeek'
         },
         columns: [[
-            { field: 'date', title: '预约日期', width: 100 },
+            { field: 'date', title: '预约日期', width: 100, formatter: parseDate },
+            { field: 'dayOfWeek', title: '日期星期', width: 100, formatter: parseDayOfWeek },
             { field: 'start', title: '开始时间', width: 100 },
             { field: 'end', title: '结束时间', width: 100, },
             { field: 'user', title: '预约人', width: 100, },
             { field: 'user_type', title: '预约人类型', width: 100, formatter: getUserType }
         ]]
     });
+
+    function parseDate(date)
+    {
+        return date.split(' ')[0];
+    }
+
+    function parseDayOfWeek(value)
+    {
+        switch (parseInt(value))
+        {
+            case 0: return "周日";
+            case 1: return "周一";
+            case 2: return "周二";
+            case 3: return "周三";
+            case 4: return "周四";
+            case 5: return "周五";
+            case 6: return "周六";
+        }
+    }
 
     function getUserType(value)
     {
