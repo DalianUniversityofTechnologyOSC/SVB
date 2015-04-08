@@ -22,6 +22,7 @@
         switch (value)
         {
             case 11: return "/Teacher/BookingSite"; break;
+            case 12: return "/Teacher/MyReservation"; break;
         }
     }
     function GetParameters(value)
@@ -39,7 +40,7 @@
             title: title,
             selected: true,
             closable: true,
-            onClose:delOpenWindow,
+            onClose: delOpenWindow,
             tentext: "<div style='windth:180px;margin:auto;margin-top:200px;text-align:center'><img src=\"/Themes/Images/loading.gif\"><p>玩命加载中....</p><div>"
         });
 

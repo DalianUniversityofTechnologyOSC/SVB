@@ -111,5 +111,21 @@ namespace SportsVenueBooking.Controllers
         {
             return new Reservation().SearchReservationJson(duration, space, startDate, endDate, dayOfWeek);
         }
+
+        /// <summary>
+        /// 显示我的预约页
+        /// </summary>
+        /// <returns>我的预约页</returns>
+        [HttpPost]
+        public PartialViewResult MyReservation()
+        {
+            return PartialView();
+        }
+
+        [HttpPost]
+        public string GetMyReservationData()
+        {
+            return new Reservation().GetMyReservationData(Convert.ToInt64(HttpContext.Session["techer"]));
+        }
     }
 }

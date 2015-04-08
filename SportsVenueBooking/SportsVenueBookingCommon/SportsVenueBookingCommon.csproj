@@ -82,6 +82,7 @@
     <Compile Include="Models\sp_helpdiagrams_Result.cs">
       <DependentUpon>SportsVenueBookingData.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\sysAttibute.cs" />
     <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>SportsVenueBookingData.tt</DependentUpon>
     </Compile>

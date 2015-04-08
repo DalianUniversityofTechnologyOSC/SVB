@@ -153,5 +153,25 @@ namespace SportsVenueBookingBLL
             }
             return sb.ToString().Substring(0, sb.Length - 1) + "]";
         }
+
+        public string GetMyReservationData(long id)
+        {
+            List<TeacherReservation> teacherReservations = new List<TeacherReservation>();
+            List<SportsVenueBookingCommon.Models.Reservation> reservations = base.Search(d => d.reservation_IsDel == false && d.User.user_Id == id).Where(d => d.reservation_StartTime.CompareTo(DateTime.Now) >= 0).OrderBy(d => d.reservation_StartTime).ToList();
+            List<System.Linq.Lookup<System.DayOfWeek, SportsVenueBookingCommon.Models.Reservation>.Grouping> group = reservations.GroupBy(d => d.reservation_StartTime.DayOfWeek).ToList();
+            
+            return "";
+        }
+
+        class TeacherReservation
+        {
+            public DateTime start { get; set; }
+
+            public DateTime end { get; set; }
+
+            public int day { get; set; }
+
+            public int duration { get; set; }
+        }
     }
 }
