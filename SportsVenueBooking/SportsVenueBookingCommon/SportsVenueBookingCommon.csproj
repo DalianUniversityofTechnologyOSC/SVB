@@ -35,6 +35,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Runtime.Serialization" />
@@ -83,6 +84,7 @@
       <DependentUpon>SportsVenueBookingData.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sysAttibute.cs" />
+    <Compile Include="Models\XmlDatabase.cs" />
     <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>SportsVenueBookingData.tt</DependentUpon>
     </Compile>

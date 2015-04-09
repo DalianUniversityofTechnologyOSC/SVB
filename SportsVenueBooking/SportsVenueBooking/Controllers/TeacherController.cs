@@ -47,6 +47,7 @@ namespace SportsVenueBooking.Controllers
         [HttpPost]
         public PartialViewResult BookingSite(string window_id)
         {
+            ViewBag.weekNumber = new SysAttibute().GetSemesterWeekNumber();
             ViewBag.windowId = window_id;
             ViewBag.spaces = new Space().GetAllSpace();
             ViewBag.durations = new Duration().GetAllDuration();

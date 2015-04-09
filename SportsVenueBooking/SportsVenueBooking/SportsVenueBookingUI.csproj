@@ -321,6 +321,7 @@
     <Content Include="Themes\Css\easyui\themes\icons\back.png" />
     <Content Include="Themes\Css\easyui\themes\icons\blank.gif" />
     <Content Include="Themes\Html\404.html" />
+    <Content Include="Themes\Images\line_sear.png" />
     <Content Include="Themes\Images\set.png" />
     <Content Include="Themes\Images\bg.png" />
     <Content Include="Themes\Images\bg02.png" />
@@ -407,6 +408,7 @@
     <Content Include="Themes\Images\history.png" />
     <Content Include="Themes\Images\loading.gif" />
     <Content Include="Themes\Images\reservation.png" />
+    <Content Include="Themes\JS\bookingSite.js" />
     <Content Include="Themes\JS\easyui\easyloader.js" />
     <Content Include="Themes\JS\easyui\jquery-1.11.2.js" />
     <Content Include="Themes\JS\easyui\jquery-1.11.2.min.js" />

@@ -52,3 +52,6 @@ E:\项目\svb\SportsVenueBooking\SportsVenueBooking.Tests\bin\Debug\zh-Hans\Enti
 E:\项目\svb\SportsVenueBooking\SportsVenueBooking.Tests\obj\Debug\SportsVenueBooking.Tests.csprojResolveAssemblyReference.cache
 E:\项目\svb\SportsVenueBooking\SportsVenueBooking.Tests\obj\Debug\SportsVenueBooking.Tests.dll
 E:\项目\svb\SportsVenueBooking\SportsVenueBooking.Tests\obj\Debug\SportsVenueBooking.Tests.pdb
+E:\项目\svb\SportsVenueBooking\SportsVenueBooking.Tests\obj\Debug\SportsVenueBooking.Tests.Form1.resources
+E:\项目\svb\SportsVenueBooking\SportsVenueBooking.Tests\obj\Debug\SportsVenueBooking.Tests.csproj.GenerateResource.Cache
+E:\项目\svb\SportsVenueBooking\SportsVenueBooking.Tests\bin\Debug\SportsVenueBooking.Tests.exe.config

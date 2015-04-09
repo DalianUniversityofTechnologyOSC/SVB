@@ -94,13 +94,12 @@ form {
 
 .quick-sear-box .quick-s {
     float: right;
-    width: 184px;
+    width: 320px;
     height: 58px;
     overflow: hidden;
-    background: url(../images/line_sear.png) left center no-repeat;
+    background: url(/Themes/Images/line_sear.png) left center no-repeat;
     padding-left: 15px;
     margin-top: -5px;
-    margin-right: 200px;
 }
 
 .sear-box .label {
@@ -141,7 +140,7 @@ a {
 
 .btn-area {
     margin-top: 15px;
-    float: right;
+    /*float: right;*/
 }
 
 .btn92s {
@@ -295,4 +294,26 @@ a {
 
 .disabled {
     background: gray;
+}
+
+.weekNumber {
+    width: 100px;
+    height: 28px;
+    line-height: 18px;
+    border: 1px solid #cfcdc7;
+    /*background: #fff;*/
+    padding: 5px 0 5px 5px;
+    color: #333;
+}
+
+.quick-sear-box .quick-s ul {
+    width: 80px;
+    float: left;
+    list-style: none;
+    margin-top: 10px;
+    margin-left: -20px;
+}
+
+.week {
+    color: gray;
 }

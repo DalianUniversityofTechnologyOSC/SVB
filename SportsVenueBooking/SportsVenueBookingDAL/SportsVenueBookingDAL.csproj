@@ -49,6 +49,7 @@
     <Compile Include="Reservation.cs" />
     <Compile Include="Snooker.cs" />
     <Compile Include="Space.cs" />
+    <Compile Include="SysAttibute.cs" />
     <Compile Include="User.cs" />
   </ItemGroup>
   <ItemGroup>
