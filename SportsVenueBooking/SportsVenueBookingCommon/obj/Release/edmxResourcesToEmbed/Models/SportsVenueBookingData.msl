@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="SportsVenueBookingModelStoreContainer" CdmEntityContainer="SportsVenueBookingEntities">
+    <EntitySetMapping Name="Durations">
+      <EntityTypeMapping TypeName="SportsVenueBookingModel.Duration">
+        <MappingFragment StoreEntitySet="Durations">
+          <ScalarProperty Name="duration_Id" ColumnName="duration_Id" />
+          <ScalarProperty Name="duration_Name" ColumnName="duration_Name" />
+          <ScalarProperty Name="duration_StartTime" ColumnName="duration_StartTime" />
+          <ScalarProperty Name="duration_EndTime" ColumnName="duration_EndTime" />
+          <ScalarProperty Name="duration_User" ColumnName="duration_User" />
+          <ScalarProperty Name="duration_IsDel" ColumnName="duration_IsDel" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Reservations">
+      <EntityTypeMapping TypeName="SportsVenueBookingModel.Reservation">
+        <MappingFragment StoreEntitySet="Reservations">
+          <ScalarProperty Name="reservation_Id" ColumnName="reservation_Id" />
+          <ScalarProperty Name="reservation_User" ColumnName="reservation_User" />
+          <ScalarProperty Name="reservation_StartTime" ColumnName="reservation_StartTime" />
+          <ScalarProperty Name="reservation_EndTime" ColumnName="reservation_EndTime" />
+          <ScalarProperty Name="reservation_IsBilling" ColumnName="reservation_IsBilling" />
+          <ScalarProperty Name="reservation_Snooker" ColumnName="reservation_Snooker" />
+          <ScalarProperty Name="reservation_IsDel" ColumnName="reservation_IsDel" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Snookers">
+      <EntityTypeMapping TypeName="SportsVenueBookingModel.Snooker">
+        <MappingFragment StoreEntitySet="Snookers">
+          <ScalarProperty Name="snooker_Id" ColumnName="snooker_Id" />
+          <ScalarProperty Name="snooker_Space" ColumnName="snooker_Space" />
+          <ScalarProperty Name="snooker_Number" ColumnName="snooker_Number" />
+          <ScalarProperty Name="snooker_User" ColumnName="snooker_User" />
+          <ScalarProperty Name="snooker_Price" ColumnName="snooker_Price" />
+          <ScalarProperty Name="snooker_IsDel" ColumnName="snooker_IsDel" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Spaces">
+      <EntityTypeMapping TypeName="SportsVenueBookingModel.Space">
+        <MappingFragment StoreEntitySet="Spaces">
+          <ScalarProperty Name="space_Id" ColumnName="space_Id" />
+          <ScalarProperty Name="space_User" ColumnName="space_User" />
+          <ScalarProperty Name="space_Name" ColumnName="space_Name" />
+          <ScalarProperty Name="space_IsDel" ColumnName="space_IsDel" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="SportsVenueBookingModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="SportsVenueBookingModel.User">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="user_Id" ColumnName="user_Id" />
+          <ScalarProperty Name="user_UserNumber" ColumnName="user_UserNumber" />
+          <ScalarProperty Name="user_Password" ColumnName="user_Password" />
+          <ScalarProperty Name="user_Type" ColumnName="user_Type" />
+          <ScalarProperty Name="user_Class" ColumnName="user_Class" />
+          <ScalarProperty Name="user_Name" ColumnName="user_Name" />
+          <ScalarProperty Name="user_Status" ColumnName="user_Status" />
+          <ScalarProperty Name="user_Remark" ColumnName="user_Remark" />
+          <ScalarProperty Name="user_IsDel" ColumnName="user_IsDel" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="SportsVenueBookingModel.Store.sp_alterdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="SportsVenueBookingModel.Store.sp_creatediagram" />
+    <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="SportsVenueBookingModel.Store.sp_dropdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="SportsVenueBookingModel.Store.sp_helpdiagramdefinition">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="SportsVenueBookingModel.sp_helpdiagramdefinition_Result">
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="SportsVenueBookingModel.Store.sp_helpdiagrams">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="SportsVenueBookingModel.sp_helpdiagrams_Result">
+          <ScalarProperty Name="Database" ColumnName="Database" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Owner" ColumnName="Owner" />
+          <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="SportsVenueBookingModel.Store.sp_renamediagram" />
+    <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="SportsVenueBookingModel.Store.sp_upgraddiagrams" />
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,55 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <meta name="keywords" content="大连工业大学,工业大学,工大,大连工业大学体育馆预约系统,体育馆预约" />
+    <meta name="description" content="大连工业大学体育馆预约系统,提供大连工业大学的体育场预约服务,为广大师生预约场地提供服务..." />
+    <title>大连工业大学体育馆预约系统|教师预约</title>
+    <script src="~/Themes/JS/easyui/jquery-1.11.2.min.js"></script>
+    <script src="~/Themes/JS/easyui/jquery.easyui.min-1.4.1.js"></script>
+    <script src="~/Themes/JS/teacher.js"></script>
+    <script src="~/Themes/JS/manage.js"></script>
+    <link href="~/Themes/Css/easyui/themes/bootstrap/easyui.css" rel="stylesheet" />
+    <link href="~/Themes/Css/easyui/themes/color.css" rel="stylesheet" />
+    <link href="~/Themes/Css/easyui/themes/icon.css" rel="stylesheet" />
+    <link href="~/Themes/Css/teacher.css" rel="stylesheet" />
+</head>
+<body class="easyui-layout">
+    <div data-options="region:'north',title:'大连工业大学体育馆预约系统',split:true,height:100"></div>
+    <div data-options="region:'south',title:'大连工业大学B128版权所有',collapsible:false,split:true,height:20"></div>
+    <div data-options="region:'west',title:'管理菜单',split:true,width:200">
+        <div title="专业方向" data-options="iconCls:'icon-add'">
+            <ul class="nav ">
+                <li value="11" class="active">
+                    <img class="liimage" src="~/Themes/Images/booking.png" />
+                    预约场地
+                </li>
+                <li value="12">
+                    <img class="liimage" src="~/Themes/Images/reservation.png" />
+                    我的预约
+                </li>
+                <li value="13"> 
+                    <img class="liimage" src="~/Themes/Images/history.png" />
+                    预约历史
+                </li>
+                <li value="14">
+                    <img class="liimage" src="~/Themes/Images/set.png" />
+                    账号设置
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div data-options="region:'center',title:'预约操作'">
+        <div id="sub_panel" title="欢迎">
+            <div title="欢迎">
+                <table id="user_info"></table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

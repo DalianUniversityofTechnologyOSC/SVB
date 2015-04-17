@@ -30,7 +30,7 @@ namespace SportsVenueBookingCommon
             string newStr = String.Empty;
             foreach (string s in strArr)
             {
-                newStr += s;
+                newStr += s.Count() >= 2 ? s : "0" + s;
             }
             return newStr;
         }
@@ -61,6 +61,21 @@ namespace SportsVenueBookingCommon
                 case "5": return DayOfWeek.Friday;
                 case "6": return DayOfWeek.Saturday;
                 default: return new DayOfWeek();
+            }
+        }
+
+        public static int DateTimeStringToInt(this string dayOfWeek)
+        {
+            switch (dayOfWeek)
+            {
+                case "周一": return 1;
+                case "周二": return 2;
+                case "周三": return 3;
+                case "周四": return 4;
+                case "周五": return 5;
+                case "周六": return 6;
+                case "周日": return 0;
+                default: return -1;
             }
         }
     }

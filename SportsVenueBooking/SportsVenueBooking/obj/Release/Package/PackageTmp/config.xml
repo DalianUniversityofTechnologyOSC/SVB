@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sys.config>
+  <semesterTime>
+    <start>2015/03/03</start>
+    <end>2015/07/20</end>
+  </semesterTime>
+</sys.config>

@@ -404,6 +404,7 @@
     <Content Include="Themes\Css\easyui\themes\metro\validatebox.css" />
     <Content Include="Themes\Css\easyui\themes\metro\window.css" />
     <Content Include="Global.asax" />
+    <None Include="Properties\PublishProfiles\svb.pubxml" />
     <None Include="Themes\JS\easyui\jquery-1.11.2.intellisense.js" />
     <Content Include="Themes\Images\history.png" />
     <Content Include="Themes\Images\loading.gif" />
@@ -452,6 +453,7 @@
     <Content Include="Views\Teacher\BookingSite.cshtml" />
     <Content Include="Views\Teacher\SearchReservation.cshtml" />
     <Content Include="Views\Teacher\MyReservation.cshtml" />
+    <Content Include="Views\Teacher\TeacherSet.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

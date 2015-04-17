@@ -20,9 +20,16 @@ namespace SportsVenueBookingBLL
         /// <param name="type">场地类型</param>
         /// <param name="time">课程时间</param>
         /// <param name="dayOfWeek">日期星期</param>
+        /// <param name="isWeek">是否周查询</param>
         /// <returns>预约情况Json数据</returns>
-        public string GetAppointmentInfo(string startDate, string endDate, string conditions, string type, string time, string dayOfWeek)
+        public string GetAppointmentInfo(string startDate, string endDate, string conditions, string type, string time, string dayOfWeek, bool isWeek)
         {
+            DateTime semesterStart = new SysAttibute().GetSemesterStart();
+            if (isWeek)
+            {
+                startDate = semesterStart.AddDays((Convert.ToDouble(startDate) - 1) * 7).ToString().Split(' ')[0];
+                endDate = semesterStart.AddDays(Convert.ToDouble(endDate) * 7).ToString().Split(' ')[0];
+            }
             List<SportsVenueBookingCommon.Models.Reservation> duration_reseration = this.GetDurationAppointInfo(time, startDate, endDate, dayOfWeek);
             List<SportsVenueBookingCommon.Models.Duration> durations = new Duration().GetDurationInfo(time);
             List<SportsVenueBookingCommon.Models.Space> spaces = new Space().GetSpaceList(type);
@@ -33,22 +40,30 @@ namespace SportsVenueBookingBLL
             ts.EndDate = endDate.ToDateTime();
             int idle = 0;
             int busy = 0;
-            int common = dayOfWeek == "-1" ? (endDate.ToDateTime() - startDate.ToDateTime()).Days + 1 : ((endDate.ToDateTime() - startDate.ToDateTime()).Days + 1) / 7;
+            int common = ((endDate.ToDateTime() - startDate.ToDateTime()).Days + 1) / 7 + 1;
             sb.Append("[");
+            int rowIndex = 0;                                                                     //数据行索引
             foreach (SportsVenueBookingCommon.Models.Duration d in durations)
             {
                 foreach (SportsVenueBookingCommon.Models.Space s in spaces)
                 {
-                    ts.Clear();
-                    idle = 0;
-                    busy = 0;
-                    ts.Add(d.duration_StartTime, d.duration_EndTime);
-
-                    busy = duration_reseration.Where(k => (ts.IsContain(k.reservation_StartTime) || ts.IsContain(k.reservation_EndTime)) && k.Snooker.Space.space_Id == s.space_Id).Count();
-                    idle = common - busy;
-                    if ((conditions == "1" && busy == 0) || conditions == "0")
+                    for (int i = 0; i <= (dayOfWeek == "-1" ? 6 : 0); i++)
                     {
-                        sb.Append("{\"id\":\"" + d.duration_Id + "\",\"time\":\"" + d.duration_Name + "\",\"type\":\"" + s.space_Name + "\",\"idle\":\"" + idle + "\",\"appointment\":\"" + busy + "\",\"isAllIdle\":\"" + busy + "\",\"seach\":\"" + (busy == 0 ? "0" : d.duration_Id.ToString() + "/" + s.space_Id) + "\",\"remarks\":\"" + (idle == 0 ? "-1" : d.duration_Id.ToString() + "/" + s.space_Id) + "\"},");
+                        ts.Clear();
+                        idle = 0;
+                        busy = 0;
+                        ts.Add(d.duration_StartTime, d.duration_EndTime);
+
+                        busy = duration_reseration.Where(k => (ts.IsContain(k.reservation_StartTime) || ts.IsContain(k.reservation_EndTime)) && k.Snooker.Space.space_Id == s.space_Id && k.reservation_StartTime.DayOfWeek.ToInt() == i).Count();
+                        idle = common - busy;
+                        if ((conditions == "1" && busy == 0) || conditions == "0")
+                        {
+                            sb.Append("{\"id\":\"" + rowIndex + "\",\"time\":\"" + d.duration_Name + "\",\"start\":\"" + startDate + "\",\"end\":\"" + endDate + "\",\"startWeek\":\"" + ((startDate.ToDateTime().DayOfYear - semesterStart.DayOfYear) / 7 + 1) + "\",\"endWeek\":\"" + (endDate.ToDateTime().DayOfYear - semesterStart.DayOfYear) / 7 + "\",\"dayOfWeek\":\"" + (dayOfWeek == "-1" ? i.ToString() : dayOfWeek) + "\",\"type\":\"" + s.space_Name + "\",\"idle\":\"" + idle + "\",\"appointment\":\"" + busy + "\",\"isAllIdle\":\"" + busy + "\",\"seach\":\"" + (busy == 0 ? "0" : d.duration_Id.ToString() + "/" + s.space_Id) + "\",\"remarks\":\"" + (busy != 0 ? "-1" : d.duration_Id.ToString() + "/" + s.space_Id + "/" + (rowIndex++)) + "\"},");
+                            if (busy != 0)
+                            {
+                                rowIndex++;
+                            }
+                        }
                     }
                 }
             }
@@ -66,7 +81,7 @@ namespace SportsVenueBookingBLL
         private List<SportsVenueBookingCommon.Models.Reservation> GetDurationAppointInfo(string durationId, string startDate, string endDate, string dayOfWeek)
         {
             TimeSlot ts = new Duration().GetDurationTimeSlot(durationId, startDate, endDate);
-            return base.Search(d => d.reservation_IsDel == false).Where(d => (ts.IsContain(d.reservation_StartTime) || ts.IsContain(d.reservation_EndTime)) && (d.reservation_StartTime.DayOfWeek.ToInt() == Convert.ToInt32(dayOfWeek) || dayOfWeek == "-1")).ToList();
+            return base.Search(d => d.reservation_IsDel == false).Where(d => (ts.IsContain(d.reservation_StartTime) || ts.IsContain(d.reservation_EndTime)) && (d.reservation_StartTime.DayOfWeek.ToInt() == dayOfWeek.DateTimeStringToInt() || dayOfWeek == "-1")).ToList();
         }
 
         /// <summary>
@@ -159,7 +174,7 @@ namespace SportsVenueBookingBLL
             List<TeacherReservation> teacherReservations = new List<TeacherReservation>();
             List<SportsVenueBookingCommon.Models.Reservation> reservations = base.Search(d => d.reservation_IsDel == false && d.User.user_Id == id).Where(d => d.reservation_StartTime.CompareTo(DateTime.Now) >= 0).OrderBy(d => d.reservation_StartTime).ToList();
             //List<System.Linq.Lookup<System.DayOfWeek, SportsVenueBookingCommon.Models.Reservation>.Grouping> group = reservations.GroupBy(d => d.reservation_StartTime.DayOfWeek).ToList();
-            
+
             return "";
         }
 

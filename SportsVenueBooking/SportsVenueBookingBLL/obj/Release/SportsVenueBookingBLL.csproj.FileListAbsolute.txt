@@ -1,0 +1,12 @@
+E:\项目\svb\SportsVenueBooking\SportsVenueBookingBLL\bin\Release\SportsVenueBookingBLL.dll
+E:\项目\svb\SportsVenueBooking\SportsVenueBookingBLL\bin\Release\SportsVenueBookingBLL.pdb
+E:\项目\svb\SportsVenueBooking\SportsVenueBookingBLL\bin\Release\SportsVenueBookingCommon.dll
+E:\项目\svb\SportsVenueBooking\SportsVenueBookingBLL\bin\Release\SportsVenueBookingDAL.dll
+E:\项目\svb\SportsVenueBooking\SportsVenueBookingBLL\bin\Release\EntityFramework.dll
+E:\项目\svb\SportsVenueBooking\SportsVenueBookingBLL\bin\Release\SportsVenueBookingCommon.pdb
+E:\项目\svb\SportsVenueBooking\SportsVenueBookingBLL\bin\Release\SportsVenueBookingDAL.pdb
+E:\项目\svb\SportsVenueBooking\SportsVenueBookingBLL\bin\Release\EntityFramework.xml
+E:\项目\svb\SportsVenueBooking\SportsVenueBookingBLL\bin\Release\zh-Hans\EntityFramework.resources.dll
+E:\项目\svb\SportsVenueBooking\SportsVenueBookingBLL\obj\Release\SportsVenueBookingBLL.csprojResolveAssemblyReference.cache
+E:\项目\svb\SportsVenueBooking\SportsVenueBookingBLL\obj\Release\SportsVenueBookingBLL.dll
+E:\项目\svb\SportsVenueBooking\SportsVenueBookingBLL\obj\Release\SportsVenueBookingBLL.pdb

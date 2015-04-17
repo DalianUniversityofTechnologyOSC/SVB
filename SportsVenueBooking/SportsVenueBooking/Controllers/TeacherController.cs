@@ -63,11 +63,12 @@ namespace SportsVenueBooking.Controllers
         /// <param name="type">场地类型</param>
         /// <param name="time">课程时间</param>
         /// <param name="dayOfWeek">课程星期</param>
+        /// <param name="isWeek">是否是周查询</param>
         /// <returns>场地预约情况Json数据</returns>
         [HttpPost]
-        public string GetAppointmentInfo(string startDate, string endDate, string conditions, string type, string time, string dayOfWeek)
+        public string GetAppointmentInfo(string startDate, string endDate, string conditions, string type, string time, string dayOfWeek, bool isWeek)
         {
-            return new Reservation().GetAppointmentInfo(startDate, endDate, conditions, type, time, dayOfWeek);
+            return new Reservation().GetAppointmentInfo(startDate, endDate, conditions, type, time, dayOfWeek, isWeek);
         }
 
         /// <summary>
@@ -127,6 +128,11 @@ namespace SportsVenueBooking.Controllers
         public string GetMyReservationData()
         {
             return new Reservation().GetMyReservationData(Convert.ToInt64(HttpContext.Session["techer"]));
+        }
+
+        public ActionResult TeacherSet()
+        {
+            return View();
         }
     }
 }

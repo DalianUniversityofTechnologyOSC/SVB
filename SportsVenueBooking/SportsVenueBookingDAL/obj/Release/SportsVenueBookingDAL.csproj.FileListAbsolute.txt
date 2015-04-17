@@ -1,0 +1,10 @@
+E:\项目\svb\SportsVenueBooking\SportsVenueBookingDAL\bin\Release\SportsVenueBookingDAL.dll
+E:\项目\svb\SportsVenueBooking\SportsVenueBookingDAL\bin\Release\SportsVenueBookingDAL.pdb
+E:\项目\svb\SportsVenueBooking\SportsVenueBookingDAL\bin\Release\EntityFramework.dll
+E:\项目\svb\SportsVenueBooking\SportsVenueBookingDAL\bin\Release\SportsVenueBookingCommon.dll
+E:\项目\svb\SportsVenueBooking\SportsVenueBookingDAL\bin\Release\SportsVenueBookingCommon.pdb
+E:\项目\svb\SportsVenueBooking\SportsVenueBookingDAL\bin\Release\EntityFramework.xml
+E:\项目\svb\SportsVenueBooking\SportsVenueBookingDAL\bin\Release\zh-Hans\EntityFramework.resources.dll
+E:\项目\svb\SportsVenueBooking\SportsVenueBookingDAL\obj\Release\SportsVenueBookingDAL.csprojResolveAssemblyReference.cache
+E:\项目\svb\SportsVenueBooking\SportsVenueBookingDAL\obj\Release\SportsVenueBookingDAL.dll
+E:\项目\svb\SportsVenueBooking\SportsVenueBookingDAL\obj\Release\SportsVenueBookingDAL.pdb

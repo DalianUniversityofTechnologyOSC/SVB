@@ -20,5 +20,10 @@ namespace SportsVenueBookingBLL
             DateTime end = db.Search(d => d.end).ToDateTime();
             return (int)Math.Ceiling((double)((end.DayOfYear - start.DayOfYear) / 7));
         }
+
+        public DateTime GetSemesterStart()
+        {
+            return db.Search(d => d.start).ToDateTime();
+        }
     }
 }
