@@ -324,7 +324,7 @@ a {
 }
 
 .layout {
-    border: 1px solid #1678be;
+    /*border: 1px solid #1678be;*/
     border-radius: 5px 5px 0 0;
     -moz-border-radius: 5px 5px 0 0;
     -ms-border-radius: 5px 5px 0 0;
@@ -382,13 +382,13 @@ a {
 }
 
 .btn92, .btn122, .btn200, .btn30 {
+    padding-left: 10px;
     height: 28px;
     line-height: 28px;
     border: 1px solid #ccc;
     background-position: 0 -100px;
     text-align: center;
 }
-
 
 .i-city, .i-date, .i-new, .i-close, .i-card, .i-save, .i-save-dis, .i-del, .i-re, .i-ok, .slideTxt .num, .per-sel h2, .s-box .sub, .order-item-hd .icon-btn, .i-edit, .i-editbtn, .t-list .cdz strong, .up-box-hd a, .add-per span, .i-ok, .txt-wrong, .i-savebtn, .login .w-txt, .i-wrong, .i-clear {
     background: url(/Themes/Images/icon.png) no-repeat;
@@ -410,4 +410,38 @@ a {
 .i-editbtn {
     background-position: 0 -1148px;
     padding-left: 20px;
+    padding-right: 10px;
+    height: 30px;
+    padding-top: 3px;
+    cursor: pointer;
+}
+
+.i-savebtn {
+    background-position: 0 -748px;
+    padding-left: 20px;
+    padding-right: 10px;
+    height: 30px;
+    padding-top: 3px;
+    cursor: pointer;
+}
+
+.infoblock .info-item {
+    line-height: 30px;
+    height: 30px;
+    margin-bottom: 5px;
+    position: relative;
+}
+
+    .infoblock .info-item .label {
+        display: block;
+        width: 265px;
+        float: left;
+        height: 30px;
+        line-height: 30px;
+        text-align: right;
+        padding-right: 5px;
+    }
+
+#basic_info_base {
+    display: none;
 }

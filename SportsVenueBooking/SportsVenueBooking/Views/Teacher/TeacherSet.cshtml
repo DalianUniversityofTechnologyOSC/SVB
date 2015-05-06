@@ -1,8 +1,10 @@
-﻿<div class="main">
+﻿@{
+    SportsVenueBookingCommon.Models.User teacher = ViewBag.techerInfo as SportsVenueBookingCommon.Models.User;
+}
+<div class="main">
     <!--系统信息 开始-->
     <div class="layout order">
-        <form id="modifyUserForm" method="get" enctype="application/x-www-form-urlencoded">
-            <div class="lay-hd">个人信息</div>
+        <div id="modifyUserForm">
             <div class="lay-bd">
                 <div class="infoblock">
                     <div class="tit clearfix">
@@ -11,14 +13,14 @@
                             <label>基本信息</label>
                         </div>
                         <div class="tit-btn" id="basic_info_edit_div">
-                            <a href="#nogo" class="btn92" id="basic_info_edit" shape="rect">
+                            <a class="btn92" id="basic_info_edit" shape="rect">
                                 <span class="i-editbtn">
                                     <label>编辑</label>
                                 </span>
                             </a>
                         </div>
                         <div class="tit-btn" id="basic_info_save_div" style="display: none;">
-                            <a href="#nogo" class="btn92" id="basic_info_save" shape="rect">
+                            <a class="btn92" id="basic_info_save" shape="rect">
                                 <span class="i-savebtn">
                                     <label>保存</label>
                                 </span>
@@ -30,69 +32,23 @@
                         <div class="info-item">
                             <span class="label">
                                 <span class="required">*</span>
-                                用户名：
+                                教师编号：
                             </span>
-                            <input name="userDTO.loginUserDTO.user_name" style="display:none;" type="text" value="liguifa199305080">
-                            <div class="con">liguifa199305080</div>
+                            <div class="con">@teacher.user_UserNumber</div>
                         </div>
                         <div class="info-item">
                             <span class="label">
                                 <span class="required">*</span>
                                 姓名：
                             </span>
-                            <div class="con">李贵发</div>
+                            <input id="t_name" type="text" value="@teacher.user_Name">
                         </div>
                         <div class="info-item">
                             <span class="label">
                                 <span class="required">*</span>
-                                性别：
+                                备注：
                             </span>
-                            <div class="con">
-                                <span class="mr15">
-                                    <input type="radio" class="radio" name="userDTO.sex_code" value="M" checked="checked">
-                                    <label>男</label>
-                                </span>
-                                <span>
-                                    <input type="radio" name="userDTO.sex_code" value="F" class="radio">
-                                    <label>女</label>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="info-item">
-                            <span class="label">国家/地区：</span>
-                            <div class="con">
-                                <span>
-                                    <span>中国CHINA</span>
-                                </span>
-                                <input type="hidden" name="userDTO.country_code" value="CN">
-                            </div>
-                        </div>
-                        <div class="info-item">
-                            <span class="label">
-                                <span class="required">*</span>
-                                证件类型：
-                            </span>
-                            <div class="con">二代身份证</div>
-                        </div>
-                        <div class="info-item">
-                            <span class="label">
-                                <span class="required">*</span>
-                                证件号码：
-                            </span>
-                            <div class="con">520201199305083610</div>
-                        </div>
-                        <div class="info-item">
-                            <span class="label">出生日期：</span>
-                            <div class="con">
-                                <input type="text" readonly="readonly" value="1993-05-08" id="born_date" name="userDTO.born_date" class="inptxt w200 color333">
-                            </div>
-                        </div>
-                        <div class="info-item">
-                            <span class="label">核验状态：</span>
-                            <div>
-                                <div class="con" style="color:#0077FF;" title="">已通过</div>
-                            </div>
-                            <!-- <div  style="color:#FF7F00" th:text="${notice1}">测试</div> -->
+                            <input id="t_remark" type="text" value="@teacher.user_Remark">
                         </div>
                         <div class="info-item">
                             <span class="label">
@@ -100,9 +56,10 @@
                                 登录密码：
                             </span>
                             <div class="con">
-                                <input type="password" value="" name="userDTO.password" maxlength="25" class="inptxt w200 color333">
+                                <input type="password" id="t_pwd" value="" name="userDTO.password" maxlength="25" class="inptxt w200 color333">
+                                <span class="tips one-line required">正确输入密码才能修改个人资料</span>
                             </div>
-                            <div class="tips one-line">正确输入密码才能修改个人资料</div>
+
                         </div>
                     </div>
                     <!--查看-->
@@ -110,56 +67,71 @@
                         <div class="info-item">
                             <span class="label">
                                 <span class="required">*</span>
-                                用户名：
+                                教师编号：
                             </span>
-                            <div class="con">liguifa199305080</div>
+                            <div class="con">@teacher.user_UserNumber</div>
                         </div>
                         <div class="info-item">
                             <span class="label">
                                 <span class="required">*</span>
                                 姓名：
                             </span>
-                            <div class="con">李贵发</div>
+                            <div class="con">@teacher.user_Name</div>
                         </div>
                         <div class="info-item">
-                            <span class="label">
-                                <span class="required">*</span>
-                                性别：
-                            </span>
-                            <div class="con">男</div>
-                        </div>
-                        <div class="info-item">
-                            <span class="label">国家/地区：</span>
-                            <div class="con">中国CHINA</div>
-                        </div>
-                        <div class="info-item">
-                            <span class="label">
-                                <span class="required">*</span>
-                                证件类型：
-                            </span>
-                            <div class="con">二代身份证</div>
-                        </div>
-                        <div class="info-item">
-                            <span class="label">
-                                <span class="required">*</span>
-                                证件号码：
-                            </span>
-                            <div class="con">520201199305083610</div>
-                        </div>
-                        <div class="info-item">
-                            <span class="label">出生日期：</span>
-                            <div class="con">1993-05-08</div>
-                        </div>
-                        <div class="info-item">
-                            <span class="label">核验状态：</span>
+                            <span class="label">用户状态：</span>
                             <div>
-                                <div class="con" style="color:#0077FF;" title="">已通过</div>
+                                @if (teacher.user_Status)
+                                {
+                                    <div style="color:#FF7F00" th:text="${notice1}">锁定</div>
+                                }
+                                else
+                                {
+                                    <div class="con" style="color:#0077FF;" title="">正常</div>
+                                }
                             </div>
-                            <!-- <div  style="color:#FF7F00" th:text="${notice1}">测试</div> -->
+                        </div>
+                        <div class="info-item">
+                            <span class="label">
+                                <span class="required"></span>
+                                备注：
+                            </span>
+                            <div class="con">@teacher.user_Remark</div>
                         </div>
                     </div>
                 </div>
             </div>
-        </form>
+        </div>
     </div>
 </div>
+<script type="text/javascript">
+    $("#basic_info_edit_div").click(function ()
+    {
+        $("#basic_info_base").css("display", "block");
+        $("#basic_info_view").css("display", "none");
+        $("#basic_info_edit_div").css("display", "none");
+        $("#basic_info_save_div").css("display", "block");
+    });
+    $("#basic_info_save_div").click(function ()
+    {
+        $("#basic_info_view").css("display", "block");
+        $("#basic_info_base").css("display", "none");
+        $("#basic_info_save_div").css("display", "none");
+        $("#basic_info_edit_div").css("display", "block");
+
+        $.ajax({
+            type: "post",
+            url: "/Teacher/ModifyPwd",
+            data: {
+                t_id: "@teacher.user_Id",
+                t_num: $("#t_name").val(),
+                t_remark: $("#t_remark").val(),
+                t_pwd: $("#t_pwd").val()
+            },
+            success: function (data)
+            {
+                
+            }
+        });
+    });
+</script>

@@ -13,6 +13,7 @@ namespace SportsVenueBooking.Controllers
     /// 教师预约模块控制器
     /// </summary>
     //[UserAuthorization("teacher", "/User/SubscribeLogin")]       //等待登录模板完成启用
+    [OutputCache(Duration = 10)]
     public class TeacherController : Controller
     {
         //
@@ -37,7 +38,7 @@ namespace SportsVenueBooking.Controllers
         public string GetUserInfo()
         {
             long tId = Convert.ToInt64(HttpContext.Session["techer"].ToString());
-            return new User().GetUserInfo(tId);
+            return new User().GetUserInfo<string>(tId,true);
         }
 
         /// <summary>
@@ -130,9 +131,19 @@ namespace SportsVenueBooking.Controllers
             return new Reservation().GetMyReservationData(Convert.ToInt64(HttpContext.Session["techer"]));
         }
 
+        /// <summary>
+        /// 显示账号设置界面
+        /// </summary>
+        /// <returns>账号设置界面</returns>
         public ActionResult TeacherSet()
         {
+            ViewBag.techerInfo = new User().GetUserInfo<SportsVenueBookingCommon.Models.User>(Convert.ToInt64(HttpContext.Session["techer"]));
             return View();
+        }
+
+        public JsonResult ModifyInfo()
+        {
+            return ModifyInfo();
         }
     }
 }
